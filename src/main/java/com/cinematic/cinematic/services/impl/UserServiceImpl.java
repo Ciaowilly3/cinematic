@@ -1,5 +1,6 @@
 package com.cinematic.cinematic.services.impl;
 
+import com.cinematic.cinematic.exceptions.NotFoundException;
 import com.cinematic.cinematic.models.User;
 import com.cinematic.cinematic.repositories.UserRepository;
 import com.cinematic.cinematic.services.UserService;
@@ -23,5 +24,15 @@ public class UserServiceImpl implements UserService {
         val users = userRepository.findAll();
         log.info("End - retrieveAllUsers - out: {}", users);
         return users;
+    }
+
+    public  User retrieveUserById(Long id){
+        log.info("Start - retrieveUserById - args: id: {}", id);
+        val user = userRepository.findById(id);
+        if (user.isEmpty()){
+            throw new NotFoundException("User con id "+ id + " non trovato");
+        }
+        log.info("End - retrieveUserById - out: {}", user);
+        return user.get();
     }
 }

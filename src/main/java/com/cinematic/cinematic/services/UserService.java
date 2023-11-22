@@ -7,4 +7,6 @@ import java.util.List;
 public interface UserService {
 
     public List<User> retrieveAllUsers();
+
+    public  User retrieveUserById(Long id);
 }
