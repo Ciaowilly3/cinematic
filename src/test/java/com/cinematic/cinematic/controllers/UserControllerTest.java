@@ -40,4 +40,17 @@ class UserControllerTest {
                 .andExpect(content().json("[{\"userName\" : \"marco\"}, {\"userName\" : \"luca\"}]"));
         verify(userService, times(1)).retrieveAllUsers();
     }
+
+    @Test
+    void retrieveUserById() throws Exception {
+        val userId = 12L;
+        val user = User.builder().userName("marco").userId(userId).build();
+        
+        when(userService.retrieveUserById(userId)).thenReturn(user);
+        
+        mockMvc.perform(get(path + "/singleUser/{id}", userId))
+                .andExpect(status().isOk())
+                .andExpect(content().json("{\"userName\" : \"marco\"}"));
+        verify(userService, times(1)).retrieveUserById(userId);
+    }
 }

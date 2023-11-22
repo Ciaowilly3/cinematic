@@ -10,6 +10,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -35,5 +36,17 @@ class UserServiceImplTest {
 
         assertEquals(userList, result);
 
+    }
+
+    @Test
+    void retrieveUserById() {
+        val userID = 12L;
+        val user = User.builder().userName("marco").userId(userID).build();
+
+        when(userRepository.findById(userID)).thenReturn(Optional.of(user));
+
+        val result = userService.retrieveUserById(userID);
+
+        assertEquals(user, result);
     }
 }
