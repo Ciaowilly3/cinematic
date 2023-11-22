@@ -12,7 +12,6 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -30,7 +29,7 @@ class CinemaControllerTest {
     @MockBean
     private CinemaServiceImpl cinemaService;
 
-    private final String route = "/api/cinema";
+    private final String path = "/api/cinema";
     @Test
     void retrieveAllCinema() throws Exception {
         val cinema1 = Cinema.builder().cinemaName("Cinestar").build();
@@ -38,7 +37,7 @@ class CinemaControllerTest {
         val cinemaList = List.of(cinema2,cinema1);
         when(cinemaService.retrieveAllCinema()).thenReturn(cinemaList);
 
-        mockMvc.perform(get(route))
+        mockMvc.perform(get(path))
                 .andExpect(status().isOk())
                 .andExpect(content().json("[{\"cinemaName\" : \"Cinestar\"}, {\"cinemaName\" : \"udiCine\"}]"));
         verify(cinemaService, times(1)).retrieveAllCinema();
@@ -48,7 +47,7 @@ class CinemaControllerTest {
     void addCinema() throws Exception {
         val cinema = Cinema.builder().cinemaName("Cinestar").build();
 
-        mockMvc.perform(post(route)
+        mockMvc.perform(post(path)
                 .contentType("application/json")
                 .content("{\"cinemaName\" : \"Cinestar\"}"))
                 .andExpect(status().isOk());
