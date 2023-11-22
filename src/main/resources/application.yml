@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/lavori_db
+    url: jdbc:mysql://localhost:3306/cinematic_db
     username: root
     password:
     driver-class-name: com.mysql.cj.jdbc.Driver
