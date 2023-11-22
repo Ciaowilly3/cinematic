@@ -10,6 +10,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -43,5 +44,18 @@ class FilmServiceImplTest {
         val result = filmService.retrieveFilmsByTitle("Ro");
 
         assertEquals(film, result.get(0));
+    }
+
+    @Test
+    void retrieveFilmById() {
+        val filmId = 12L;
+        val film = Film.builder().title("Rocky").filmId(filmId).build();
+
+        when(filmRepository.findById(filmId)).thenReturn(Optional.of(film));
+
+        val result = filmService.retrieveFilmById(filmId);
+
+        assertEquals(film, result);
+
     }
 }

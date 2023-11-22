@@ -48,4 +48,16 @@ class FilmControllerTest {
                 .andExpect(content().json("[{\"title\" : \"Rocky\"}]"));
         verify(filmService, times(1)).retrieveFilmsByTitle("Ro");
     }
+
+    @Test
+    void retrieveFilmById() throws Exception{
+        val filmId = 12L;
+        val film = Film.builder().title("Rocky").filmId(filmId).build();
+        when(filmService.retrieveFilmById(filmId)).thenReturn(film);
+
+        mockMvc.perform(get("/api/films/singleFilm/{id}", filmId))
+                .andExpect(status().isOk())
+                .andExpect(content().json("{\"title\" : \"Rocky\"}"));
+        verify(filmService, times(1)).retrieveFilmById(filmId);
+    }
 }
