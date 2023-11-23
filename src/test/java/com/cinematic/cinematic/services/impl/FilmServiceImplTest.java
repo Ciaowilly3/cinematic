@@ -58,4 +58,13 @@ class FilmServiceImplTest {
         assertEquals(film, result);
 
     }
+
+    @Test
+    void makeNewFilm() {
+        val film = Film.builder().title("Rocky").build();
+
+        filmService.makeNewFilm(film);
+
+        verify(filmRepository, times(1)).save(film);
+    }
 }

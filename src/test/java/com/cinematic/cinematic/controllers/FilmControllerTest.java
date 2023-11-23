@@ -25,6 +25,8 @@ class FilmControllerTest {
 
     @MockBean
     private FilmServiceImpl filmService;
+
+    private final String path = "/api/films";
     @Test
     void retrieveAllFilms() throws Exception {
         val film1 = Film.builder().title("trappola di cristallo").build();
@@ -32,7 +34,7 @@ class FilmControllerTest {
         val filmList = List.of(film1, film2);
         when(filmService.retrieveAllFilms()).thenReturn(filmList);
 
-        mockMvc.perform(get("/api/films"))
+        mockMvc.perform(get(path))
                 .andExpect(status().isOk())
                 .andExpect(content().json("[{\"title\" : \"trappola di cristallo\"}, {\"title\" : \"Rocky\"}]"));
         verify(filmService, times(1)).retrieveAllFilms();
@@ -43,7 +45,7 @@ class FilmControllerTest {
         val film = Film.builder().title("Rocky").build();
         when(filmService.retrieveFilmsByTitle("Ro")).thenReturn(List.of(film));
 
-        mockMvc.perform(get("/api/films/{title}", "Ro"))
+        mockMvc.perform(get(path + "/{title}", "Ro"))
                 .andExpect(status().isOk())
                 .andExpect(content().json("[{\"title\" : \"Rocky\"}]"));
         verify(filmService, times(1)).retrieveFilmsByTitle("Ro");
@@ -55,9 +57,21 @@ class FilmControllerTest {
         val film = Film.builder().title("Rocky").filmId(filmId).build();
         when(filmService.retrieveFilmById(filmId)).thenReturn(film);
 
-        mockMvc.perform(get("/api/films/singleFilm/{id}", filmId))
+        mockMvc.perform(get(path + "/singleFilm/{id}", filmId))
                 .andExpect(status().isOk())
                 .andExpect(content().json("{\"title\" : \"Rocky\"}"));
         verify(filmService, times(1)).retrieveFilmById(filmId);
+    }
+
+    @Test
+    void makeNewFilm() throws Exception {
+        val film = Film.builder().title("Rocky").build();
+
+        mockMvc.perform(post(path)
+                .contentType("application/json")
+                .content("{\"title\" : \"Rocky\"}"))
+                .andExpect(status().isOk());
+
+        verify(filmService, times(1)).makeNewFilm(film);
     }
 }
