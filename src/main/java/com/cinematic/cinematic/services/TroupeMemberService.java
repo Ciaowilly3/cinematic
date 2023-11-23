@@ -7,4 +7,6 @@ import java.util.List;
 public interface TroupeMemberService {
 
     public List<TroupeMember> retrieveAllTroupeMembers();
+
+    public TroupeMember retrieveTroupeMemberById(Long id);
 }

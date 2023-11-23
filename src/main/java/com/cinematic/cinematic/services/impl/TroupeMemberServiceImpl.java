@@ -1,5 +1,6 @@
 package com.cinematic.cinematic.services.impl;
 
+import com.cinematic.cinematic.exceptions.NotFoundException;
 import com.cinematic.cinematic.models.TroupeMember;
 import com.cinematic.cinematic.repositories.TroupeMemberRepository;
 import com.cinematic.cinematic.services.TroupeMemberService;
@@ -22,7 +23,17 @@ public class TroupeMemberServiceImpl implements TroupeMemberService {
     public List<TroupeMember> retrieveAllTroupeMembers(){
         log.info("Start - retrieveAllTroupeMembers - args:none");
         val troupeMembers = troupeMemberRepository.findAll();
-        log.info("Start - retrieveAllTroupeMembers - out: {}", troupeMembers);
+        log.info("End - retrieveAllTroupeMembers - out: {}", troupeMembers);
         return troupeMembers;
+    }
+
+    public TroupeMember retrieveTroupeMemberById(Long id){
+        log.info("Start - retrieveTroupeMemberById - args: id: {}", id);
+        val member = troupeMemberRepository.findById(id);
+        if (member.isEmpty()){
+            throw new NotFoundException("not found member with id: " + id);
+        }
+        log.info("End - retrieveTroupeMemberById - out: {}", member.get());
+        return member.get();
     }
 }
