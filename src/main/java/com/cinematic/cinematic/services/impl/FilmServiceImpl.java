@@ -45,4 +45,10 @@ public class FilmServiceImpl implements FilmService {
         return films;
     }
 
+    public void makeNewFilm(Film film){
+        log.info("Start - makeNewFilm - args: title: {}", film);
+        filmRepository.save(film);
+        log.info("End - makeNewFilm - out: none");
+    }
+
 }

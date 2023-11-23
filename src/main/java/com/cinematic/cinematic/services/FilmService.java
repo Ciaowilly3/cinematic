@@ -11,4 +11,6 @@ public interface FilmService {
     public  Film retrieveFilmById(Long id);
     public List<Film> retrieveFilmsByTitle(String title);
 
+    public void makeNewFilm(Film film);
+
 }

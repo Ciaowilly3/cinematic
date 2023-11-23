@@ -5,10 +5,7 @@ import com.cinematic.cinematic.mappers.FilmMapper;
 import com.cinematic.cinematic.models.Film;
 import com.cinematic.cinematic.services.impl.FilmServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,6 +23,9 @@ public class FilmController {
 
     @GetMapping(path = "/singleFilm/{id}")
     public FilmDto retrieveFilmById(@PathVariable("id") Long id){return FilmMapper.INSTANCE.filmToFilmDto(filmService.retrieveFilmById(id));}
+
+    @PostMapping
+    public void makeNewFilm(@RequestBody Film film){filmService.makeNewFilm(film);}
 
     @GetMapping(path = "/{title}")
     public List<FilmDto> retrieveFilmsByTitle(@PathVariable("title") String title){return FilmMapper.INSTANCE.filmsToFilmsDtos(filmService.retrieveFilmsByTitle(title));}
