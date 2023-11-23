@@ -3,6 +3,7 @@ package com.cinematic.cinematic.services.impl;
 import com.cinematic.cinematic.models.Cinema;
 import com.cinematic.cinematic.repositories.CinemaRepository;
 import com.cinematic.cinematic.services.CinemaService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +13,11 @@ import java.util.List;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class CinemaServiceImpl implements CinemaService {
 
     private final CinemaRepository cinemaRepository;
 
-    @Autowired
-    public CinemaServiceImpl (CinemaRepository cinemaRepository){this.cinemaRepository = cinemaRepository;}
 
     public List<Cinema> retrieveAllCinema(){
         log.info("Start - retrieveAllCinema - args:none");

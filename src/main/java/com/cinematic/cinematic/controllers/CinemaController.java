@@ -4,19 +4,18 @@ import com.cinematic.cinematic.dtos.CinemaDto;
 import com.cinematic.cinematic.mappers.CinemaMapper;
 import com.cinematic.cinematic.models.Cinema;
 import com.cinematic.cinematic.services.impl.CinemaServiceImpl;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RequestMapping("cinema")
+@RequiredArgsConstructor
 @RestController
 public class CinemaController {
 
     private final CinemaServiceImpl cinemaService;
-
-    @Autowired
-    public CinemaController(CinemaServiceImpl cinemaService){this.cinemaService = cinemaService;}
 
     @GetMapping
     public List<CinemaDto> retrieveAllCinema(){

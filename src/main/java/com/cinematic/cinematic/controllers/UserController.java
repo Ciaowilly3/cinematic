@@ -4,6 +4,7 @@ import com.cinematic.cinematic.dtos.UserDto;
 import com.cinematic.cinematic.dtos.requestdtos.UserRequestDto;
 import com.cinematic.cinematic.mappers.UserMapper;
 import com.cinematic.cinematic.services.impl.UserServiceImpl;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,12 +12,10 @@ import java.util.List;
 
 @RequestMapping("users")
 @RestController
+@RequiredArgsConstructor
 public class UserController {
 
     private final UserServiceImpl userService;
-
-    @Autowired
-    public UserController(UserServiceImpl userService){this.userService = userService;}
 
     @GetMapping
     public List<UserDto> retrieveAllUsers(){return UserMapper.INSTANCE.usersToUserDtos(userService.retrieveAllUsers());
