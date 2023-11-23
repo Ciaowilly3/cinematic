@@ -15,6 +15,7 @@ public interface FilmReviewMapper {
 
     @Mapping(source = "film", target = "filmDto")
     @Mapping(source = "user", target = "userDto")
+    @Mapping(target = "review", source = "review")
     public FilmReviewDto filmReviewToFilmReviewDto(FilmReview filmReview);
 
     public List<FilmReviewDto> filmReviewsToFilmReviewsDtos(List<FilmReview> filmReviews);

@@ -19,6 +19,9 @@ public class FilmReview {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long filmReviewId;
 
+    @Column(name = "review")
+    private String review;
+
     @ManyToOne
     @JoinColumn(name = "film_id", nullable = true)
     private Film film;
