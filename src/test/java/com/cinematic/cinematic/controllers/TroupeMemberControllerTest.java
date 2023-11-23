@@ -41,4 +41,17 @@ class TroupeMemberControllerTest {
                 .andExpect(content().json("[{\"memberName\" : \"marco\"}, {\"memberName\" : \"luca\"}]"));
         verify(troupeMemberService, times(1)).retrieveAllTroupeMembers();
     }
+
+    @Test
+    void retrieveTroupeMemberById() throws Exception {
+        val memberId = 12L;
+        val member = TroupeMember.builder().troupeMemberId(memberId).memberName("marco").build();
+
+        when(troupeMemberService.retrieveTroupeMemberById(memberId)).thenReturn(member);
+
+        mockMvc.perform(get(path + "/singleMember/{id}", memberId))
+                .andExpect(status().isOk())
+                .andExpect(content().json("{\"memberName\" : \"marco\"}"));
+        verify(troupeMemberService, times(1)).retrieveTroupeMemberById(memberId);
+    }
 }

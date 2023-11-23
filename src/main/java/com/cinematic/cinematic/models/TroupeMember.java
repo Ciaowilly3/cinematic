@@ -17,7 +17,7 @@ public class TroupeMember {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    private Long troupeMemberId;
 
     @Column(name = "profile_pic")
     private String profilePic;

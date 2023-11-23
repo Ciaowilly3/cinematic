@@ -27,7 +27,7 @@ public class TroupeMemberController {
     }
 
     @GetMapping(path = "/singleMember/{id}")
-    private TroupeMemberDto retrieveTroupeMemberById(@PathVariable("id")Long id){
+    public TroupeMemberDto retrieveTroupeMemberById(@PathVariable("id")Long id){
         return TroupeMemberMapper.INSTANCE.troupeMemberToTroupeMemberDto(troupeMemberService.retrieveTroupeMemberById(id));
     }
 }

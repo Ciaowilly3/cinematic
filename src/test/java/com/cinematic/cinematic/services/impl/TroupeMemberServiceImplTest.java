@@ -11,6 +11,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -37,4 +38,17 @@ class TroupeMemberServiceImplTest {
         verify(troupeMemberRepository, times(1)).findAll();
     }
 
+    @Test
+    void retrieveTroupeMemberById() {
+        val memberId =12L;
+        val member = TroupeMember.builder().troupeMemberId(memberId).memberName("marco").build();
+
+        when(troupeMemberRepository.findById(memberId)).thenReturn(Optional.of(member));
+
+        val result = troupeMemberService.retrieveTroupeMemberById(memberId);
+
+        assertEquals(member, result);
+
+        verify(troupeMemberRepository, times(1)).findById(memberId);
+    }
 }
