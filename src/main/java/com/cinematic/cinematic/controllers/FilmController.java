@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("api/films")
+@RequestMapping("films")
 @RestController
 public class FilmController {
 
@@ -30,3 +30,8 @@ public class FilmController {
     @GetMapping(path = "/{title}")
     public List<FilmDto> retrieveFilmsByTitle(@PathVariable("title") String title){return FilmMapper.INSTANCE.filmsToFilmsDtos(filmService.retrieveFilmsByTitle(title));}
 }
+// TODO: levare api dal path
+// TODO: controllare la dependency injection venga fatta tramite requiredargsconstructor di lombok
+// TODO: sostituire l'istanza statica di mapstruct con la versione Bean, occhio ad aggiornare l'annotation aggiungendo modelspring
+// TODO: quando la variabile java è uguale a quella tra le graffe non specificare in pathvariable
+// TODO: scrivere path in snakecase;

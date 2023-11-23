@@ -24,3 +24,4 @@ public class Cinema {
     @Column(name = "city")
     private String city;
 }
+//TODO: Capire differenzee fra i vari generation type

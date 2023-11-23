@@ -1,24 +1,28 @@
 package com.cinematic.cinematic.services.impl;
 
+import com.cinematic.cinematic.dtos.requestdtos.UserRequestDto;
 import com.cinematic.cinematic.exceptions.NotFoundException;
+import com.cinematic.cinematic.models.Cinema;
 import com.cinematic.cinematic.models.User;
+import com.cinematic.cinematic.repositories.CinemaRepository;
 import com.cinematic.cinematic.repositories.UserRepository;
 import com.cinematic.cinematic.services.UserService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-
-    @Autowired
-    public UserServiceImpl(UserRepository userRepository){this.userRepository = userRepository;}
+    private final CinemaRepository cinemaRepository;
     public List<User> retrieveAllUsers(){
         log.info("Start - retrieveAllUsers - args:none");
         val users = userRepository.findAll();
@@ -34,5 +38,22 @@ public class UserServiceImpl implements UserService {
         }
         log.info("End - retrieveUserById - out: {}", user);
         return user.get();
+    }
+
+    public void makeUser(UserRequestDto userRequestDto) {
+        log.info("Start - makeUser - args: userRequest: {}", userRequestDto);
+        Optional<Cinema> cinema = Optional.empty();
+        if (userRequestDto.getCinemaId() != null) {
+            cinema = cinemaRepository.findById(userRequestDto.getCinemaId());
+        }
+        val user = User.builder()
+                .userName(userRequestDto.getUserName())
+                .role(userRequestDto.getRole())
+                .email(userRequestDto.getEmail())
+                .password(userRequestDto.getPassword())
+                .cinema(cinema.orElse(null))
+                .build();
+        userRepository.save(user);
+        log.info("End - makeUser - out: {}", user);
     }
 }

@@ -1,17 +1,15 @@
 package com.cinematic.cinematic.controllers;
 
 import com.cinematic.cinematic.dtos.UserDto;
+import com.cinematic.cinematic.dtos.requestdtos.UserRequestDto;
 import com.cinematic.cinematic.mappers.UserMapper;
 import com.cinematic.cinematic.services.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("api/users")
+@RequestMapping("users")
 @RestController
 public class UserController {
 
@@ -26,4 +24,10 @@ public class UserController {
 
     @GetMapping(path = "singleUser/{id}")
     public UserDto retrieveUserById(@PathVariable("id") Long id){return UserMapper.INSTANCE.userToUserDto(userService.retrieveUserById(id));}
+
+    @PostMapping
+    public void makeUser(@RequestBody UserRequestDto userRequestDto){
+        userService.makeUser(userRequestDto);
+    }
 }
+//TODO: utilizzare ResponseEntity<x> come tipo di uscita

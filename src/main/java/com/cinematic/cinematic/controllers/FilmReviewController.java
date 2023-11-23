@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("api/filmReviews")
+@RequestMapping("filmReviews")
 @RestController
 public class FilmReviewController {
 
@@ -29,3 +29,4 @@ public class FilmReviewController {
         filmReviewService.makeFilmReview(requestDto);
     }
 }
+// TODO: rendere review entità principale cambiando nome

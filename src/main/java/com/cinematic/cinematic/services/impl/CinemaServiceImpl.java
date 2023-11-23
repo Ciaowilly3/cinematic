@@ -31,3 +31,6 @@ public class CinemaServiceImpl implements CinemaService {
         cinemaRepository.save(cinema);
     }
 }
+//TODO: Fare attenzione a quello che si stampa
+//TODO: verificare se findAll può tornare null e gestire di conseguenza il size
+//TODO: Assicurarsi che in tutti i servizi ci sia start end in ogni caso

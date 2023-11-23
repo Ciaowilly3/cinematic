@@ -26,7 +26,7 @@ class FilmControllerTest {
     @MockBean
     private FilmServiceImpl filmService;
 
-    private final String path = "/api/films";
+    private final String path = "/films";
     @Test
     void retrieveAllFilms() throws Exception {
         val film1 = Film.builder().title("trappola di cristallo").build();

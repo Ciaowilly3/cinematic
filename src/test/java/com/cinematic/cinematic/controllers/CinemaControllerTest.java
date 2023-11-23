@@ -29,7 +29,7 @@ class CinemaControllerTest {
     @MockBean
     private CinemaServiceImpl cinemaService;
 
-    private final String path = "/api/cinema";
+    private final String path = "/cinema";
     @Test
     void retrieveAllCinema() throws Exception {
         val cinema1 = Cinema.builder().cinemaName("Cinestar").build();
@@ -54,3 +54,4 @@ class CinemaControllerTest {
         verify(cinemaService, times(1)).addCinema(cinema);
     }
 }
+//TODO: è preferibile leggere i json da file in risorse

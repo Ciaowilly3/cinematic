@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("api/cinema")
+@RequestMapping("cinema")
 @RestController
 public class CinemaController {
 

@@ -13,3 +13,4 @@ public class CinemaDto {
 
     private final String city;
 }
+// TODO: rinominare i Dto e levare sotto package

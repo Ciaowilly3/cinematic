@@ -37,3 +37,4 @@ public class TroupeMemberServiceImpl implements TroupeMemberService {
         return member.get();
     }
 }
+//TODO: capire come utilizzare orElse throw per levare l'if

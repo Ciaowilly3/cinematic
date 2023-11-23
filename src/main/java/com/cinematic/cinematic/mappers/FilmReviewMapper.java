@@ -20,3 +20,5 @@ public interface FilmReviewMapper {
 
     public List<FilmReviewDto> filmReviewsToFilmReviewsDtos(List<FilmReview> filmReviews);
 }
+//TODO: sistemare i warning
+//TODO: togliere il mapping di review e capire perchè non funziona

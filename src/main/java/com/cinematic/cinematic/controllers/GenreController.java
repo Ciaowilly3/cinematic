@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RequestMapping("api/genres")
+@RequestMapping("genres")
 @RestController
 public class GenreController {
 
@@ -24,3 +24,4 @@ public class GenreController {
         return GenreMapper.INSTANCE.genreToGenreDto(genreService.retrieveGenreById(id));
     }
 }
+//TODO: rendere path uguale al nome del controller
