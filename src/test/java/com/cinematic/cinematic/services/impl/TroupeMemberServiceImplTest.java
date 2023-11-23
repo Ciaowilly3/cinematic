@@ -36,4 +36,5 @@ class TroupeMemberServiceImplTest {
         assertEquals(troupeMembers, result);
         verify(troupeMemberRepository, times(1)).findAll();
     }
+
 }
