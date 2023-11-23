@@ -1,5 +1,6 @@
 package com.cinematic.cinematic.controllers;
 
+import com.cinematic.cinematic.dtos.requestdtos.FilmReviewRequestDto;
 import com.cinematic.cinematic.models.Film;
 import com.cinematic.cinematic.models.FilmReview;
 import com.cinematic.cinematic.services.impl.FilmReviewServiceImpl;
@@ -40,5 +41,17 @@ class FilmReviewControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().json("[{\"review\" : \"trappola di cristallo\"}, {\"review\" : \"Rocky\"}]"));
         verify(filmReviewService, times(1)).retrieveAllFilmReviews();
+    }
+
+    @Test
+    void makeFilmReview() throws Exception{
+        val review = FilmReviewRequestDto.builder().review("reviu").build();
+
+        mockMvc.perform(post(path)
+                .contentType("application/json")
+                .content("{\"review\" : \"reviu\"}"))
+                .andExpect(status().isOk());
+
+        verify(filmReviewService, times(1)).makeFilmReview(review);
     }
 }
