@@ -28,7 +28,7 @@ class TroupeMemberControllerTest {
     @MockBean
     private TroupeMemberServiceImpl troupeMemberService;
 
-    private final String path = "/api/troupeMembers";
+    private final String path = "/api/troupe-members";
     @Test
     void retrieveAllTroupeMembers() throws Exception{
         val member1 = TroupeMember.builder().memberName("marco").build();
@@ -49,7 +49,7 @@ class TroupeMemberControllerTest {
 
         when(troupeMemberService.retrieveTroupeMemberById(memberId)).thenReturn(member);
 
-        mockMvc.perform(get(path + "/singleMember/{id}", memberId))
+        mockMvc.perform(get(path + "/single-member/{id}", memberId))
                 .andExpect(status().isOk())
                 .andExpect(content().json("{\"memberName\" : \"marco\"}"));
         verify(troupeMemberService, times(1)).retrieveTroupeMemberById(memberId);

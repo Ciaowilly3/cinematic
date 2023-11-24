@@ -50,7 +50,7 @@ class UserControllerTest {
         
         when(userService.retrieveUserById(userId)).thenReturn(user);
         
-        mockMvc.perform(get(path + "/singleUser/{id}", userId))
+        mockMvc.perform(get(path + "/single-user/{id}", userId))
                 .andExpect(status().isOk())
                 .andExpect(content().json("{\"userName\" : \"marco\"}"));
         verify(userService, times(1)).retrieveUserById(userId);

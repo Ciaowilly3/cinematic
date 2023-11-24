@@ -21,7 +21,7 @@ public class FilmController {
     @GetMapping
     public List<FilmDto> retrieveAllFilms(){return filmMapper.filmsToFilmsDtos(filmService.retrieveAllFilms());}
 
-    @GetMapping(path = "/singleFilm/{id}")
+    @GetMapping(path = "/single-film/{id}")
     public FilmDto retrieveFilmById(@PathVariable Long id){return filmMapper.filmToFilmDto(filmService.retrieveFilmById(id));}
 
     @PostMapping
@@ -34,4 +34,4 @@ public class FilmController {
 // TODO: controllare la dependency injection venga fatta tramite requiredargsconstructor di lombok FATTO
 // TODO: sostituire l'istanza statica di mapstruct con la versione Bean, occhio ad aggiornare l'annotation aggiungendo modelspring FATTO
 // TODO: quando la variabile java è uguale a quella tra le graffe non specificare in pathvariable FATTO
-// TODO: scrivere path in snakecase;
+// TODO: scrivere path in snakecase; FATTO

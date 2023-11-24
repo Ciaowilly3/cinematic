@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RequestMapping("troupeMembers")
+@RequestMapping("troupe-members")
 @RestController
 @RequiredArgsConstructor
 public class TroupeMemberController {
@@ -25,7 +25,7 @@ public class TroupeMemberController {
         return troupeMemberMapper.troupeMembersToTroupeMembersDtos(troupeMemberService.retrieveAllTroupeMembers());
     }
 
-    @GetMapping(path = "/singleMember/{id}")
+    @GetMapping(path = "/single-member/{id}")
     public TroupeMemberDto retrieveTroupeMemberById(@PathVariable Long id){
         return troupeMemberMapper.troupeMemberToTroupeMemberDto(troupeMemberService.retrieveTroupeMemberById(id));
     }

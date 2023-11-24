@@ -28,7 +28,7 @@ class FilmReviewControllerTest {
     @MockBean
     private FilmReviewServiceImpl filmReviewService;
 
-    private final String path = "/api/filmReviews";
+    private final String path = "/api/film-reviews";
     @Test
     void retrieveAllFilmReviews() throws Exception {
         val review1 = FilmReview.builder().review("trappola di cristallo").build();

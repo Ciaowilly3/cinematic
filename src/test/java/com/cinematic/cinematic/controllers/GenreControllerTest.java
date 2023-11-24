@@ -35,7 +35,7 @@ class GenreControllerTest {
 
         when(genreService.retrieveGenreById(genreId)).thenReturn(genre);
 
-        mockMvc.perform(get(path + "/singleGenre/{id}", genreId))
+        mockMvc.perform(get(path + "/single-genre/{id}", genreId))
                 .andExpect(status().isOk())
                 .andExpect(content().json("{\"genreName\" : \"fantascienza\"}"));
         verify(genreService, times(1)).retrieveGenreById(genreId);
