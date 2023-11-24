@@ -16,13 +16,14 @@ import java.util.List;
 public class UserController {
 
     private final UserServiceImpl userService;
+    private final UserMapper userMapper;
 
     @GetMapping
-    public List<UserDto> retrieveAllUsers(){return UserMapper.INSTANCE.usersToUserDtos(userService.retrieveAllUsers());
+    public List<UserDto> retrieveAllUsers(){return userMapper.usersToUserDtos(userService.retrieveAllUsers());
     }
 
     @GetMapping(path = "singleUser/{id}")
-    public UserDto retrieveUserById(@PathVariable("id") Long id){return UserMapper.INSTANCE.userToUserDto(userService.retrieveUserById(id));}
+    public UserDto retrieveUserById(@PathVariable("id") Long id){return userMapper.userToUserDto(userService.retrieveUserById(id));}
 
     @PostMapping
     public void makeUser(@RequestBody UserRequestDto userRequestDto){

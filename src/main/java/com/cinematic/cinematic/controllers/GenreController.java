@@ -17,11 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class GenreController {
 
     private final GenreServiceImpl genreService;
+    private final GenreMapper genreMapper;
 
 
     @GetMapping(path = "singleGenre/{id}")
     public GenreDto retrieveGenreById(@PathVariable("id")Long id){
-        return GenreMapper.INSTANCE.genreToGenreDto(genreService.retrieveGenreById(id));
+        return genreMapper.genreToGenreDto(genreService.retrieveGenreById(id));
     }
 }
 //TODO: rendere path uguale al nome del controller

@@ -19,14 +19,14 @@ import java.util.List;
 public class TroupeMemberController {
 
     private final TroupeMemberServiceImpl troupeMemberService;
-
+    private final TroupeMemberMapper troupeMemberMapper;
     @GetMapping
     public List<TroupeMemberDto> retrieveAllTroupeMembers(){
-        return TroupeMemberMapper.INSTANCE.troupeMembersToTroupeMembersDtos(troupeMemberService.retrieveAllTroupeMembers());
+        return troupeMemberMapper.troupeMembersToTroupeMembersDtos(troupeMemberService.retrieveAllTroupeMembers());
     }
 
     @GetMapping(path = "/singleMember/{id}")
     public TroupeMemberDto retrieveTroupeMemberById(@PathVariable("id")Long id){
-        return TroupeMemberMapper.INSTANCE.troupeMemberToTroupeMemberDto(troupeMemberService.retrieveTroupeMemberById(id));
+        return troupeMemberMapper.troupeMemberToTroupeMemberDto(troupeMemberService.retrieveTroupeMemberById(id));
     }
 }

@@ -17,10 +17,11 @@ import java.util.List;
 public class FilmReviewController {
 
     private final FilmReviewServiceImpl filmReviewService;
+    private final FilmReviewMapper filmReviewMapper;
 
     @GetMapping
     public List<FilmReviewDto> retrieveAllFilmReviews(){
-        return FilmReviewMapper.INSTANCE.filmReviewsToFilmReviewsDtos(filmReviewService.retrieveAllFilmReviews());
+        return filmReviewMapper.filmReviewsToFilmReviewsDtos(filmReviewService.retrieveAllFilmReviews());
     }
 
     @PostMapping

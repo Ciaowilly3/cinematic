@@ -7,11 +7,8 @@ import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface CinemaMapper {
-
-    CinemaMapper INSTANCE = Mappers.getMapper(CinemaMapper.class);
-
     CinemaDto cinemaToCinemaDto(Cinema cinema);
 
     List<CinemaDto> cinemaToCinemaDtos(List<Cinema> cinemaList);

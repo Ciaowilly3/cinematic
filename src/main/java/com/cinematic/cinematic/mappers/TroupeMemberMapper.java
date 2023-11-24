@@ -7,11 +7,8 @@ import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface TroupeMemberMapper {
-
-    TroupeMemberMapper INSTANCE = Mappers.getMapper(TroupeMemberMapper.class);
-
     TroupeMemberDto troupeMemberToTroupeMemberDto(TroupeMember troupeMember);
 
     List<TroupeMemberDto> troupeMembersToTroupeMembersDtos(List<TroupeMember> troupeMembers);

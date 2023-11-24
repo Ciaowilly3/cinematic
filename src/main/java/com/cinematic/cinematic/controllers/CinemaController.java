@@ -16,10 +16,11 @@ import java.util.List;
 public class CinemaController {
 
     private final CinemaServiceImpl cinemaService;
+    private final CinemaMapper cinemaMapper;
 
     @GetMapping
     public List<CinemaDto> retrieveAllCinema(){
-        return CinemaMapper.INSTANCE.cinemaToCinemaDtos(cinemaService.retrieveAllCinema());
+        return cinemaMapper.cinemaToCinemaDtos(cinemaService.retrieveAllCinema());
     }
 
     @PostMapping

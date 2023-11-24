@@ -16,18 +16,19 @@ import java.util.List;
 public class FilmController {
 
     private final FilmServiceImpl filmService;
+    private final FilmMapper filmMapper;
 
     @GetMapping
-    public List<FilmDto> retrieveAllFilms(){return FilmMapper.INSTANCE.filmsToFilmsDtos(filmService.retrieveAllFilms());}
+    public List<FilmDto> retrieveAllFilms(){return filmMapper.filmsToFilmsDtos(filmService.retrieveAllFilms());}
 
     @GetMapping(path = "/singleFilm/{id}")
-    public FilmDto retrieveFilmById(@PathVariable("id") Long id){return FilmMapper.INSTANCE.filmToFilmDto(filmService.retrieveFilmById(id));}
+    public FilmDto retrieveFilmById(@PathVariable("id") Long id){return filmMapper.filmToFilmDto(filmService.retrieveFilmById(id));}
 
     @PostMapping
     public void makeNewFilm(@RequestBody Film film){filmService.makeNewFilm(film);}
 
     @GetMapping(path = "/{title}")
-    public List<FilmDto> retrieveFilmsByTitle(@PathVariable("title") String title){return FilmMapper.INSTANCE.filmsToFilmsDtos(filmService.retrieveFilmsByTitle(title));}
+    public List<FilmDto> retrieveFilmsByTitle(@PathVariable("title") String title){return filmMapper.filmsToFilmsDtos(filmService.retrieveFilmsByTitle(title));}
 }
 // TODO: levare api dal path FATTO
 // TODO: controllare la dependency injection venga fatta tramite requiredargsconstructor di lombok FATTO
