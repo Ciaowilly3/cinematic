@@ -23,7 +23,7 @@ public class UserController {
     }
 
     @GetMapping(path = "singleUser/{id}")
-    public UserDto retrieveUserById(@PathVariable("id") Long id){return userMapper.userToUserDto(userService.retrieveUserById(id));}
+    public UserDto retrieveUserById(@PathVariable Long id){return userMapper.userToUserDto(userService.retrieveUserById(id));}
 
     @PostMapping
     public void makeUser(@RequestBody UserRequestDto userRequestDto){

@@ -21,7 +21,7 @@ public class GenreController {
 
 
     @GetMapping(path = "singleGenre/{id}")
-    public GenreDto retrieveGenreById(@PathVariable("id")Long id){
+    public GenreDto retrieveGenreById(@PathVariable Long id){
         return genreMapper.genreToGenreDto(genreService.retrieveGenreById(id));
     }
 }

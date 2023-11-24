@@ -22,16 +22,16 @@ public class FilmController {
     public List<FilmDto> retrieveAllFilms(){return filmMapper.filmsToFilmsDtos(filmService.retrieveAllFilms());}
 
     @GetMapping(path = "/singleFilm/{id}")
-    public FilmDto retrieveFilmById(@PathVariable("id") Long id){return filmMapper.filmToFilmDto(filmService.retrieveFilmById(id));}
+    public FilmDto retrieveFilmById(@PathVariable Long id){return filmMapper.filmToFilmDto(filmService.retrieveFilmById(id));}
 
     @PostMapping
     public void makeNewFilm(@RequestBody Film film){filmService.makeNewFilm(film);}
 
     @GetMapping(path = "/{title}")
-    public List<FilmDto> retrieveFilmsByTitle(@PathVariable("title") String title){return filmMapper.filmsToFilmsDtos(filmService.retrieveFilmsByTitle(title));}
+    public List<FilmDto> retrieveFilmsByTitle(@PathVariable String title){return filmMapper.filmsToFilmsDtos(filmService.retrieveFilmsByTitle(title));}
 }
 // TODO: levare api dal path FATTO
 // TODO: controllare la dependency injection venga fatta tramite requiredargsconstructor di lombok FATTO
-// TODO: sostituire l'istanza statica di mapstruct con la versione Bean, occhio ad aggiornare l'annotation aggiungendo modelspring
-// TODO: quando la variabile java è uguale a quella tra le graffe non specificare in pathvariable
+// TODO: sostituire l'istanza statica di mapstruct con la versione Bean, occhio ad aggiornare l'annotation aggiungendo modelspring FATTO
+// TODO: quando la variabile java è uguale a quella tra le graffe non specificare in pathvariable FATTO
 // TODO: scrivere path in snakecase;
