@@ -1,7 +1,6 @@
 package com.cinematic.cinematic.controllers;
 
 import com.cinematic.cinematic.dtos.requestdtos.FilmReviewRequestDto;
-import com.cinematic.cinematic.models.Film;
 import com.cinematic.cinematic.models.FilmReview;
 import com.cinematic.cinematic.services.impl.FilmReviewServiceImpl;
 import lombok.val;
@@ -14,21 +13,20 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(FilmReviewController.class)
+@WebMvcTest(ReviewFilmController.class)
 @AutoConfigureMockMvc
-class FilmReviewControllerTest {
+class ReviewFilmControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
     private FilmReviewServiceImpl filmReviewService;
 
-    private final String path = "/api/film-reviews";
+    private final String path = "/review-films";
     @Test
     void retrieveAllFilmReviews() throws Exception {
         val review1 = FilmReview.builder().review("trappola di cristallo").build();

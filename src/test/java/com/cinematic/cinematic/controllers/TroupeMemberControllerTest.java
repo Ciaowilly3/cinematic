@@ -28,7 +28,7 @@ class TroupeMemberControllerTest {
     @MockBean
     private TroupeMemberServiceImpl troupeMemberService;
 
-    private final String path = "/api/troupe-members";
+    private final String path = "/troupe-members";
     @Test
     void retrieveAllTroupeMembers() throws Exception{
         val member1 = TroupeMember.builder().memberName("marco").build();

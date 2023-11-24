@@ -26,7 +26,7 @@ class GenreControllerTest {
     @MockBean
     private GenreServiceImpl genreService;
 
-    private final String path = "/api/genres";
+    private final String path = "/genres";
     @SneakyThrows
     @Test
     void retrieveGenreById() {

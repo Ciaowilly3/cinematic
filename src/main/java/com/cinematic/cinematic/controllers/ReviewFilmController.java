@@ -2,19 +2,17 @@ package com.cinematic.cinematic.controllers;
 
 import com.cinematic.cinematic.dtos.FilmReviewDto;
 import com.cinematic.cinematic.dtos.requestdtos.FilmReviewRequestDto;
-import com.cinematic.cinematic.mappers.FilmMapper;
 import com.cinematic.cinematic.mappers.FilmReviewMapper;
 import com.cinematic.cinematic.services.impl.FilmReviewServiceImpl;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("film-reviews")
+@RequestMapping("review-films")
 @RequiredArgsConstructor
 @RestController
-public class FilmReviewController {
+public class ReviewFilmController {
 
     private final FilmReviewServiceImpl filmReviewService;
     private final FilmReviewMapper filmReviewMapper;
@@ -29,4 +27,4 @@ public class FilmReviewController {
         filmReviewService.makeFilmReview(requestDto);
     }
 }
-// TODO: rendere review entità principale cambiando nome
+// TODO: rendere review entità principale cambiando nome FATTO
