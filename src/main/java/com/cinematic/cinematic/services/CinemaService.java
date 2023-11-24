@@ -8,5 +8,5 @@ public interface CinemaService {
 
     List<Cinema> retrieveAllCinema();
 
-    void addCinema(Cinema cinema);
+    Cinema addCinema(Cinema cinema);
 }

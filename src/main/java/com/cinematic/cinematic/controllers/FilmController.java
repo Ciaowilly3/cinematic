@@ -5,6 +5,8 @@ import com.cinematic.cinematic.mappers.FilmMapper;
 import com.cinematic.cinematic.models.Film;
 import com.cinematic.cinematic.services.impl.FilmServiceImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,7 +26,10 @@ public class FilmController {
     public FilmDto retrieveFilmById(@PathVariable Long id){return filmMapper.toFilmDto(filmService.retrieveFilmById(id));}
 
     @PostMapping
-    public void makeNewFilm(@RequestBody Film film){filmService.makeNewFilm(film);}
+    public ResponseEntity<FilmDto> makeNewFilm(@RequestBody Film film){
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(filmMapper.toFilmDto(filmService.makeNewFilm(film)));
+    }
 
     @GetMapping(path = "/{title}")
     public List<FilmDto> retrieveFilmsByTitle(@PathVariable String title){return filmMapper.toFilmsDtos(filmService.retrieveFilmsByTitle(title));}

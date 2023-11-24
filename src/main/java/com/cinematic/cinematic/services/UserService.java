@@ -11,5 +11,5 @@ public interface UserService {
 
     User retrieveUserById(Long id);
 
-   void makeUser(CreateUserRequestDto createUserRequestDto);
+    User makeUser(CreateUserRequestDto createUserRequestDto);
 }

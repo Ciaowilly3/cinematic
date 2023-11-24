@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
         return user.orElseThrow(() -> new NotFoundException("User with id "+ id + " not found"));
     }
 
-    public void makeUser(CreateUserRequestDto createUserRequestDto) {
+    public User makeUser(CreateUserRequestDto createUserRequestDto) {
         log.info("Start - makeUser - args: userRequest: {}", createUserRequestDto);
         Optional<Cinema> cinema = Optional.empty();
         if (createUserRequestDto.getCinemaId() != null) {
@@ -51,5 +51,6 @@ public class UserServiceImpl implements UserService {
                 .build();
         userRepository.save(user);
         log.info("End - makeUser - out: {}", user);
+        return user;
     }
 }

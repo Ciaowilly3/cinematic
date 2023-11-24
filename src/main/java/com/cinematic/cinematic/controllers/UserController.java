@@ -5,6 +5,8 @@ import com.cinematic.cinematic.dtos.CreateUserRequestDto;
 import com.cinematic.cinematic.mappers.UserMapper;
 import com.cinematic.cinematic.services.impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,8 +27,9 @@ public class UserController {
     public UserDto retrieveUserById(@PathVariable Long id){return userMapper.toUserDto(userService.retrieveUserById(id));}
 
     @PostMapping
-    public void makeUser(@RequestBody CreateUserRequestDto createUserRequestDto){
-        userService.makeUser(createUserRequestDto);
+    public ResponseEntity<UserDto> makeUser(@RequestBody CreateUserRequestDto createUserRequestDto){
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(userMapper.toUserDto(userService.makeUser(createUserRequestDto)));
     }
 }
 //TODO: utilizzare ResponseEntity<x> come tipo di uscita

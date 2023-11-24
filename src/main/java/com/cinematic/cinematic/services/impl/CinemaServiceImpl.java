@@ -25,11 +25,11 @@ public class CinemaServiceImpl implements CinemaService {
         return cinemaList;
     }
 
-    public void addCinema(Cinema cinema){
+    public Cinema addCinema(Cinema cinema){
         log.info("Start - addCinema - args: cinema: {}", cinema);
         cinemaRepository.save(cinema);
         log.info("End - addCinema - out: {}", cinema);
-
+        return  cinema;
     }
 }
 //TODO: Fare attenzione a quello che si stampa FATTO

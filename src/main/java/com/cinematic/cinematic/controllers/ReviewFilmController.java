@@ -5,6 +5,8 @@ import com.cinematic.cinematic.dtos.CreateFilmReviewRequestDto;
 import com.cinematic.cinematic.mappers.ReviewFilmMapper;
 import com.cinematic.cinematic.services.impl.ReviewFilmServiceImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,8 +25,9 @@ public class ReviewFilmController {
     }
 
     @PostMapping
-    public void makeFilmReview(@RequestBody CreateFilmReviewRequestDto requestDto){
-        reviewFilmService.makeFilmReview(requestDto);
+    public ResponseEntity<ReviewFilmDto> makeFilmReview(@RequestBody CreateFilmReviewRequestDto requestDto){
+       return ResponseEntity.status(HttpStatus.CREATED)
+               .body(reviewFilmMapper.ToFilmReviewDto(reviewFilmService.makeFilmReview(requestDto)));
     }
 }
 // TODO: rendere review entità principale cambiando nome FATTO

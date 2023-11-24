@@ -30,7 +30,7 @@ public class ReviewFilmServiceImpl implements ReviewFilmService {
         return filmReviews;
     }
 
-    public void makeFilmReview(CreateFilmReviewRequestDto requestDto){
+    public ReviewFilm makeFilmReview(CreateFilmReviewRequestDto requestDto){
         log.info("Start - makeFilmReview - args: reviewRequest: {}", requestDto);
         val film = filmRepository.findById(requestDto.getFilmId());
         val user = userRepository.findById(requestDto.getUserId());
@@ -41,6 +41,7 @@ public class ReviewFilmServiceImpl implements ReviewFilmService {
                 .build();
         reviewFilmRepository.save(review);
         log.info("End - makeFilmReview - out: review,film,user {}{}{}", review, film, user);
+        return review;
     }
 }
 //TODO: assicurarsi che la loggata di end sia l'ultimo avvenimento all'interno del metodo FATTO

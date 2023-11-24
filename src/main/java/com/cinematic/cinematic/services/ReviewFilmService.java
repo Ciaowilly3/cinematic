@@ -9,5 +9,5 @@ public interface ReviewFilmService {
 
     List<ReviewFilm> retrieveAllFilmReviews();
 
-    void makeFilmReview(CreateFilmReviewRequestDto reviewRequestDto);
+    ReviewFilm makeFilmReview(CreateFilmReviewRequestDto reviewRequestDto);
 }
