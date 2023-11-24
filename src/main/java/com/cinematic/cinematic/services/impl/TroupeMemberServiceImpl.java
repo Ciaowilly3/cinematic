@@ -22,7 +22,7 @@ public class TroupeMemberServiceImpl implements TroupeMemberService {
     public List<TroupeMember> retrieveAllTroupeMembers(){
         log.info("Start - retrieveAllTroupeMembers - args:none");
         val troupeMembers = troupeMemberRepository.findAll();
-        log.info("End - retrieveAllTroupeMembers - out: {}", troupeMembers);
+        log.info("End - retrieveAllTroupeMembers - out: {}", troupeMembers.size());
         return troupeMembers;
     }
 

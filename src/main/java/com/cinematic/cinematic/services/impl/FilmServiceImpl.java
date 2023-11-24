@@ -22,23 +22,23 @@ public class FilmServiceImpl implements FilmService {
     public List<Film> retrieveAllFilms(){
         log.info("Start - retrieveAllFilms - args:none");
         val allFilms = filmRepository.findAll();
-        log.info("End - retrieveAllFilms - out: {}", allFilms);
+        log.info("End - retrieveAllFilms - out: {}", allFilms.size());
         return allFilms;
     }
 
     public Film retrieveFilmById(Long id){
         log.info("Start - retrieveFilmsById - args: id: {}", id);
         val film = filmRepository.findById(id);
-        log.info("End - retrieveFilmsById - out: {}", film);
         if (film.isEmpty()){
-            throw new NotFoundException("non è stato trovato alcun film con questo ID");
+            throw new NotFoundException("no film found with id " + id);
         }
+        log.info("End - retrieveFilmsById - out: {}", film);
         return film.get();
     }
     public List<Film> retrieveFilmsByTitle(String title){
         log.info("Start - retrieveFilmsByTitle - args: title: {}", title);
         val films = filmRepository.findAllByTitleContaining(title);
-        log.info("End - retrieveFilmsByTitle - out: {}", films);
+        log.info("End - retrieveFilmsByTitle - out: {}", films.size());
         return films;
     }
 

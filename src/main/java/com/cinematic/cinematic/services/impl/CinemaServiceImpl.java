@@ -22,13 +22,15 @@ public class CinemaServiceImpl implements CinemaService {
     public List<Cinema> retrieveAllCinema(){
         log.info("Start - retrieveAllCinema - args:none");
         val cinemaList = cinemaRepository.findAll();
-        log.info("End - retrieveAllCinema - out: {}", cinemaList);
+        log.info("End - retrieveAllCinema - out: {}", cinemaList.size());
         return cinemaList;
     }
 
     public void addCinema(Cinema cinema){
         log.info("Start - addCinema - args: cinema: {}", cinema);
         cinemaRepository.save(cinema);
+        log.info("End - addCinema - out: {}", cinema);
+
     }
 }
 //TODO: Fare attenzione a quello che si stampa

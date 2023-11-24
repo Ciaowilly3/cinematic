@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
     public List<User> retrieveAllUsers(){
         log.info("Start - retrieveAllUsers - args:none");
         val users = userRepository.findAll();
-        log.info("End - retrieveAllUsers - out: {}", users);
+        log.info("End - retrieveAllUsers - out: {}", users.size());
         return users;
     }
 
@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
         log.info("Start - retrieveUserById - args: id: {}", id);
         val user = userRepository.findById(id);
         if (user.isEmpty()){
-            throw new NotFoundException("User con id "+ id + " non trovato");
+            throw new NotFoundException("User with id "+ id + " not found");
         }
         log.info("End - retrieveUserById - out: {}", user);
         return user.get();

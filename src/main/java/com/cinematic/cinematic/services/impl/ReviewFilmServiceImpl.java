@@ -26,7 +26,7 @@ public class ReviewFilmServiceImpl implements ReviewFilmService {
     public List<ReviewFilm> retrieveAllFilmReviews(){
         log.info("Start - retrieveAllFilmReviews - args:none");
         val filmReviews = reviewFilmRepository.findAll();
-        log.info("End - retrieveAllFilmReviews - out: {}", filmReviews);
+        log.info("End - retrieveAllFilmReviews - out: {}", filmReviews.size());
         return filmReviews;
     }
 
@@ -38,8 +38,8 @@ public class ReviewFilmServiceImpl implements ReviewFilmService {
             throw new NotFoundException("userId or filmId doesn't match any record");
         }
         val review = ReviewFilm.builder().review(requestDto.getReview()).film(film.get()).user(user.get()).build();
-        log.info("End - makeFilmReview - out: review,film,user {}{}{}", review, film, user);
         reviewFilmRepository.save(review);
+        log.info("End - makeFilmReview - out: review,film,user {}{}{}", review, film, user);
     }
 }
 //TODO: assicurarsi che la loggata di end sia l'ultimo avvenimento all'interno del metodo
