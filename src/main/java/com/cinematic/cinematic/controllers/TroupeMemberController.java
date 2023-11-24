@@ -22,11 +22,11 @@ public class TroupeMemberController {
     private final TroupeMemberMapper troupeMemberMapper;
     @GetMapping
     public List<TroupeMemberDto> retrieveAllTroupeMembers(){
-        return troupeMemberMapper.troupeMembersToTroupeMembersDtos(troupeMemberService.retrieveAllTroupeMembers());
+        return troupeMemberMapper.toTroupeMembersDtos(troupeMemberService.retrieveAllTroupeMembers());
     }
 
     @GetMapping(path = "/single-member/{id}")
     public TroupeMemberDto retrieveTroupeMemberById(@PathVariable Long id){
-        return troupeMemberMapper.troupeMemberToTroupeMemberDto(troupeMemberService.retrieveTroupeMemberById(id));
+        return troupeMemberMapper.toTroupeMemberDto(troupeMemberService.retrieveTroupeMemberById(id));
     }
 }

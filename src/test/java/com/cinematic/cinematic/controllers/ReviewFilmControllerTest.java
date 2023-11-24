@@ -1,8 +1,8 @@
 package com.cinematic.cinematic.controllers;
 
 import com.cinematic.cinematic.dtos.CreateFilmReviewRequestDto;
-import com.cinematic.cinematic.models.FilmReview;
-import com.cinematic.cinematic.services.impl.FilmReviewServiceImpl;
+import com.cinematic.cinematic.models.ReviewFilm;
+import com.cinematic.cinematic.services.impl.ReviewFilmServiceImpl;
 import lombok.val;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +24,13 @@ class ReviewFilmControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private FilmReviewServiceImpl filmReviewService;
+    private ReviewFilmServiceImpl filmReviewService;
 
     private final String path = "/review-films";
     @Test
     void retrieveAllFilmReviews() throws Exception {
-        val review1 = FilmReview.builder().review("trappola di cristallo").build();
-        val review2 = FilmReview.builder().review("Rocky").build();
+        val review1 = ReviewFilm.builder().review("trappola di cristallo").build();
+        val review2 = ReviewFilm.builder().review("Rocky").build();
         val reviewList = List.of(review1, review2);
 
         when(filmReviewService.retrieveAllFilmReviews()).thenReturn(reviewList);

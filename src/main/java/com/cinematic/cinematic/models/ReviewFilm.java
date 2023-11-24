@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Builder(toBuilder = true)
 @NoArgsConstructor
 @Table(name = "film_reviews")
-public class FilmReview {
+public class ReviewFilm {
 
     @Id
     @Column(name = "id")

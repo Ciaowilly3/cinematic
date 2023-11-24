@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @Builder(toBuilder = true)
-public class FilmReviewDto {
+public class ReviewFilmDto {
 
     private String review;
 

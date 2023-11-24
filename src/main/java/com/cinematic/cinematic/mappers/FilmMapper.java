@@ -10,8 +10,8 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface FilmMapper {
 //    FilmMapper INSTANCE = Mappers.getMapper(FilmMapper.class);
-    FilmDto filmToFilmDto(Film film);
+    FilmDto toFilmDto(Film film);
 
-    List<FilmDto> filmsToFilmsDtos(List<Film> films);
+    List<FilmDto> toFilmsDtos(List<Film> films);
 }
-//TODO: levare prefisso lasciare tox
+//TODO: levare prefisso lasciare tox FATTO

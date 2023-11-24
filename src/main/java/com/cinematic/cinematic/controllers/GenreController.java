@@ -22,7 +22,7 @@ public class GenreController {
 
     @GetMapping(path = "single-genre/{id}")
     public GenreDto retrieveGenreById(@PathVariable Long id){
-        return genreMapper.genreToGenreDto(genreService.retrieveGenreById(id));
+        return genreMapper.toGenreDto(genreService.retrieveGenreById(id));
     }
 }
 //TODO: rendere path uguale al nome del controller SEMI-FATTO problema plurale

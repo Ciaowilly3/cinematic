@@ -18,11 +18,11 @@ public class UserController {
     private final UserMapper userMapper;
 
     @GetMapping
-    public List<UserDto> retrieveAllUsers(){return userMapper.usersToUserDtos(userService.retrieveAllUsers());
+    public List<UserDto> retrieveAllUsers(){return userMapper.toUserDtos(userService.retrieveAllUsers());
     }
 
     @GetMapping(path = "single-user/{id}")
-    public UserDto retrieveUserById(@PathVariable Long id){return userMapper.userToUserDto(userService.retrieveUserById(id));}
+    public UserDto retrieveUserById(@PathVariable Long id){return userMapper.toUserDto(userService.retrieveUserById(id));}
 
     @PostMapping
     public void makeUser(@RequestBody CreateUserRequestDto createUserRequestDto){

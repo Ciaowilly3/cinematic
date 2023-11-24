@@ -9,7 +9,7 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface CinemaMapper {
-    CinemaDto cinemaToCinemaDto(Cinema cinema);
+    CinemaDto toCinemaDto(Cinema cinema);
 
-    List<CinemaDto> cinemaToCinemaDtos(List<Cinema> cinemaList);
+    List<CinemaDto> toCinemaDtos(List<Cinema> cinemaList);
 }

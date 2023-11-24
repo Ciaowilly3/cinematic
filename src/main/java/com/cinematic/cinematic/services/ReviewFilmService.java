@@ -1,13 +1,13 @@
 package com.cinematic.cinematic.services;
 
 import com.cinematic.cinematic.dtos.CreateFilmReviewRequestDto;
-import com.cinematic.cinematic.models.FilmReview;
+import com.cinematic.cinematic.models.ReviewFilm;
 
 import java.util.List;
 
-public interface FilmReviewService {
+public interface ReviewFilmService {
 
-    public List<FilmReview> retrieveAllFilmReviews();
+    public List<ReviewFilm> retrieveAllFilmReviews();
 
     public void makeFilmReview(CreateFilmReviewRequestDto reviewRequestDto);
 }

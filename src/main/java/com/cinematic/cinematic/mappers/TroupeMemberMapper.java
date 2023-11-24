@@ -9,7 +9,7 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface TroupeMemberMapper {
-    TroupeMemberDto troupeMemberToTroupeMemberDto(TroupeMember troupeMember);
+    TroupeMemberDto toTroupeMemberDto(TroupeMember troupeMember);
 
-    List<TroupeMemberDto> troupeMembersToTroupeMembersDtos(List<TroupeMember> troupeMembers);
+    List<TroupeMemberDto> toTroupeMembersDtos(List<TroupeMember> troupeMembers);
 }

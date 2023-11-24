@@ -2,10 +2,10 @@ package com.cinematic.cinematic.services.impl;
 
 import com.cinematic.cinematic.dtos.CreateFilmReviewRequestDto;
 import com.cinematic.cinematic.models.Film;
-import com.cinematic.cinematic.models.FilmReview;
+import com.cinematic.cinematic.models.ReviewFilm;
 import com.cinematic.cinematic.models.User;
 import com.cinematic.cinematic.repositories.FilmRepository;
-import com.cinematic.cinematic.repositories.FilmReviewRepository;
+import com.cinematic.cinematic.repositories.ReviewFilmRepository;
 import com.cinematic.cinematic.repositories.UserRepository;
 import lombok.val;
 import org.junit.jupiter.api.Test;
@@ -21,29 +21,29 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class FilmReviewServiceImplTest {
+class ReviewFilmServiceImplTest {
 
     @Mock
-    private FilmReviewRepository filmReviewRepository;
+    private ReviewFilmRepository reviewFilmRepository;
     @Mock
     private FilmRepository filmRepository;
     @Mock
     private UserRepository userRepository;
 
     @InjectMocks
-    private  FilmReviewServiceImpl filmReviewService;
+    private ReviewFilmServiceImpl filmReviewService;
     @Test
     void retrieveAllFilmReviews() {
-        val review1 = FilmReview.builder().review("trappola di cristallo").build();
-        val review2 = FilmReview.builder().review("Rocky").build();
+        val review1 = ReviewFilm.builder().review("trappola di cristallo").build();
+        val review2 = ReviewFilm.builder().review("Rocky").build();
         val reviewList = List.of(review1, review2);
 
-        when(filmReviewRepository.findAll()).thenReturn(reviewList);
+        when(reviewFilmRepository.findAll()).thenReturn(reviewList);
 
         val result = filmReviewService.retrieveAllFilmReviews();
 
         assertEquals(reviewList, result);
-        verify(filmReviewRepository, times(1)).findAll();
+        verify(reviewFilmRepository, times(1)).findAll();
     }
 
     @Test
@@ -58,8 +58,8 @@ class FilmReviewServiceImplTest {
 
         filmReviewService.makeFilmReview(reviewRequest);
 
-        val review = FilmReview.builder().review(reviewRequest.getReview()).film(film).user(user).build();
+        val review = ReviewFilm.builder().review(reviewRequest.getReview()).film(film).user(user).build();
 
-        verify(filmReviewRepository,times(1)).save(review);
+        verify(reviewFilmRepository,times(1)).save(review);
     }
 }

@@ -20,7 +20,7 @@ public class CinemaController {
 
     @GetMapping
     public List<CinemaDto> retrieveAllCinema(){
-        return cinemaMapper.cinemaToCinemaDtos(cinemaService.retrieveAllCinema());
+        return cinemaMapper.toCinemaDtos(cinemaService.retrieveAllCinema());
     }
 
     @PostMapping
