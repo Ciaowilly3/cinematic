@@ -1,7 +1,6 @@
 package com.cinematic.cinematic.controllers;
 
 import com.cinematic.cinematic.models.TroupeMember;
-import com.cinematic.cinematic.models.User;
 import com.cinematic.cinematic.services.impl.TroupeMemberServiceImpl;
 import lombok.val;
 import org.junit.jupiter.api.Test;
@@ -13,7 +12,6 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;

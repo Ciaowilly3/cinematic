@@ -1,6 +1,5 @@
 package com.cinematic.cinematic.dtos;
 
-import com.cinematic.cinematic.models.Cinema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

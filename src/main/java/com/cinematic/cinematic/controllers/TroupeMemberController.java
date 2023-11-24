@@ -2,10 +2,8 @@ package com.cinematic.cinematic.controllers;
 
 import com.cinematic.cinematic.dtos.TroupeMemberDto;
 import com.cinematic.cinematic.mappers.TroupeMemberMapper;
-import com.cinematic.cinematic.models.TroupeMember;
 import com.cinematic.cinematic.services.impl.TroupeMemberServiceImpl;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

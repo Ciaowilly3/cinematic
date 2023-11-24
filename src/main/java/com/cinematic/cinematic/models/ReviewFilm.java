@@ -23,10 +23,10 @@ public class ReviewFilm {
     private String review;
 
     @ManyToOne
-    @JoinColumn(name = "film_id", nullable = true)
+    @JoinColumn(name = "film_id")
     private Film film;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = true)
+    @JoinColumn(name = "user_id")
     private User user;
 }

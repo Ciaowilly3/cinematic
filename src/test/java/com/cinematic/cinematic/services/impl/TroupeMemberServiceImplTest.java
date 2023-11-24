@@ -1,7 +1,6 @@
 package com.cinematic.cinematic.services.impl;
 
 import com.cinematic.cinematic.models.TroupeMember;
-import com.cinematic.cinematic.models.User;
 import com.cinematic.cinematic.repositories.TroupeMemberRepository;
 import lombok.val;
 import org.junit.jupiter.api.Test;

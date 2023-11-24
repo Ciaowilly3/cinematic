@@ -6,11 +6,11 @@ import java.util.List;
 
 public interface FilmService {
 
-    public List<Film> retrieveAllFilms();
+    List<Film> retrieveAllFilms();
 
-    public  Film retrieveFilmById(Long id);
-    public List<Film> retrieveFilmsByTitle(String title);
+    Film retrieveFilmById(Long id);
+    List<Film> retrieveFilmsByTitle(String title);
 
-    public void makeNewFilm(Film film);
+    void makeNewFilm(Film film);
 
 }

@@ -5,7 +5,6 @@ import com.cinematic.cinematic.mappers.FilmMapper;
 import com.cinematic.cinematic.models.Film;
 import com.cinematic.cinematic.services.impl.FilmServiceImpl;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ReviewFilmService {
 
-    public List<ReviewFilm> retrieveAllFilmReviews();
+    List<ReviewFilm> retrieveAllFilmReviews();
 
-    public void makeFilmReview(CreateFilmReviewRequestDto reviewRequestDto);
+    void makeFilmReview(CreateFilmReviewRequestDto reviewRequestDto);
 }

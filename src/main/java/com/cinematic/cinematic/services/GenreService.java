@@ -4,5 +4,5 @@ import com.cinematic.cinematic.models.Genre;
 
 public interface GenreService {
 
-    public Genre retrieveGenreById(Long id);
+    Genre retrieveGenreById(Long id);
 }

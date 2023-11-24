@@ -1,7 +1,6 @@
 package com.cinematic.cinematic.services.impl;
 
 import com.cinematic.cinematic.models.Genre;
-import com.cinematic.cinematic.models.TroupeMember;
 import com.cinematic.cinematic.repositories.GenreRepository;
 import lombok.val;
 import org.junit.jupiter.api.Test;
@@ -10,7 +9,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;

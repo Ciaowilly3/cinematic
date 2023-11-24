@@ -32,6 +32,6 @@ public class User {
     private String password;
 
     @ManyToOne
-    @JoinColumn(name = "default_cinema_id", nullable = true)
+    @JoinColumn(name = "default_cinema_id")
     private Cinema cinema;
 }

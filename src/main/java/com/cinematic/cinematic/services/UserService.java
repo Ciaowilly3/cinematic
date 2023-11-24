@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface UserService {
 
-    public List<User> retrieveAllUsers();
+    List<User> retrieveAllUsers();
 
-    public  User retrieveUserById(Long id);
+    User retrieveUserById(Long id);
 
-    public void makeUser(CreateUserRequestDto createUserRequestDto);
+   void makeUser(CreateUserRequestDto createUserRequestDto);
 }

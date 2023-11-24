@@ -1,6 +1,5 @@
 package com.cinematic.cinematic.services.impl;
 
-import com.cinematic.cinematic.dtos.GenreDto;
 import com.cinematic.cinematic.exceptions.NotFoundException;
 import com.cinematic.cinematic.models.Genre;
 import com.cinematic.cinematic.repositories.GenreRepository;
@@ -8,7 +7,6 @@ import com.cinematic.cinematic.services.GenreService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
