@@ -34,12 +34,13 @@ public class ReviewFilmServiceImpl implements ReviewFilmService {
         log.info("Start - makeFilmReview - args: reviewRequest: {}", requestDto);
         val film = filmRepository.findById(requestDto.getFilmId());
         val user = userRepository.findById(requestDto.getUserId());
-        if (film.isEmpty() || user.isEmpty()){
-            throw new NotFoundException("userId or filmId doesn't match any record");
-        }
-        val review = ReviewFilm.builder().review(requestDto.getReview()).film(film.get()).user(user.get()).build();
+        val review = ReviewFilm.builder()
+                .review(requestDto.getReview())
+                .film(film.orElseThrow(() -> new NotFoundException("userId doesn't match any record" + requestDto.getUserId())))
+                .user(user.orElseThrow(() -> new NotFoundException("filmId doesn't match any record" + requestDto.getFilmId())))
+                .build();
         reviewFilmRepository.save(review);
         log.info("End - makeFilmReview - out: review,film,user {}{}{}", review, film, user);
     }
 }
-//TODO: assicurarsi che la loggata di end sia l'ultimo avvenimento all'interno del metodo
+//TODO: assicurarsi che la loggata di end sia l'ultimo avvenimento all'interno del metodo FATTO

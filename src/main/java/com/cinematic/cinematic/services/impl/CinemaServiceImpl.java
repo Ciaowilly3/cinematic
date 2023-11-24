@@ -33,6 +33,6 @@ public class CinemaServiceImpl implements CinemaService {
 
     }
 }
-//TODO: Fare attenzione a quello che si stampa
-//TODO: verificare se findAll può tornare null e gestire di conseguenza il size
-//TODO: Assicurarsi che in tutti i servizi ci sia start end in ogni caso
+//TODO: Fare attenzione a quello che si stampa FATTO
+//TODO: verificare se findAll può tornare null e gestire di conseguenza il size FATTO
+//TODO: Assicurarsi che in tutti i servizi ci sia start end in ogni caso FATTO

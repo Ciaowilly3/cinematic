@@ -32,11 +32,8 @@ public class UserServiceImpl implements UserService {
     public  User retrieveUserById(Long id){
         log.info("Start - retrieveUserById - args: id: {}", id);
         val user = userRepository.findById(id);
-        if (user.isEmpty()){
-            throw new NotFoundException("User with id "+ id + " not found");
-        }
-        log.info("End - retrieveUserById - out: {}", user);
-        return user.get();
+        log.info("End - retrieveUserById - out: {}", user.orElse(null));
+        return user.orElseThrow(() -> new NotFoundException("User with id "+ id + " not found"));
     }
 
     public void makeUser(CreateUserRequestDto createUserRequestDto) {

@@ -22,10 +22,7 @@ public class GenreServiceImpl implements GenreService {
     public Genre retrieveGenreById(Long id) {
         log.info("Start - retrieveGenreById - args: id: {}", id);
         val genre = genreRepository.findById(id);
-        if (genre.isEmpty()){
-            throw new NotFoundException("genre with id " + id + " not found");
-        }
-        log.info("Start - retrieveGenreById - args: id: {}", genre.get());
-        return genre.get();
+        log.info("End - retrieveGenreById - out: {}", genre.orElse(null));
+        return genre.orElseThrow(() -> new NotFoundException("genre with id " + id + " not found"));
     }
 }

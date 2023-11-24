@@ -7,6 +7,7 @@ import com.cinematic.cinematic.services.TroupeMemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
+import org.aspectj.weaver.ast.Not;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,11 +30,8 @@ public class TroupeMemberServiceImpl implements TroupeMemberService {
     public TroupeMember retrieveTroupeMemberById(Long id){
         log.info("Start - retrieveTroupeMemberById - args: id: {}", id);
         val member = troupeMemberRepository.findById(id);
-        if (member.isEmpty()){
-            throw new NotFoundException("not found member with id: " + id);
-        }
-        log.info("End - retrieveTroupeMemberById - out: {}", member.get());
-        return member.get();
+        log.info("End - retrieveTroupeMemberById - out: {}", member.orElse(null));
+        return member.orElseThrow(() -> new NotFoundException("not found member with id: " + id));
     }
 }
-//TODO: capire come utilizzare orElse throw per levare l'if
+//TODO: capire come utilizzare orElse throw per levare l'if FATTO

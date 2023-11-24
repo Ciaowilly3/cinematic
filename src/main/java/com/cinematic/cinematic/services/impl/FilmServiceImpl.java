@@ -29,11 +29,8 @@ public class FilmServiceImpl implements FilmService {
     public Film retrieveFilmById(Long id){
         log.info("Start - retrieveFilmsById - args: id: {}", id);
         val film = filmRepository.findById(id);
-        if (film.isEmpty()){
-            throw new NotFoundException("no film found with id " + id);
-        }
-        log.info("End - retrieveFilmsById - out: {}", film);
-        return film.get();
+        log.info("End - retrieveFilmsById - out: {}", film.orElse(null));
+        return film.orElseThrow(() -> new NotFoundException("no film found with id " + id));
     }
     public List<Film> retrieveFilmsByTitle(String title){
         log.info("Start - retrieveFilmsByTitle - args: title: {}", title);
@@ -49,4 +46,4 @@ public class FilmServiceImpl implements FilmService {
     }
 
 }
-//TODO: Orazio mi picchia se non traduco tutto in inglese
+//TODO: Orazio mi picchia se non traduco tutto in inglese DONE xD
