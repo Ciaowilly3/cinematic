@@ -1,6 +1,6 @@
 package com.cinematic.cinematic.services.impl;
 
-import com.cinematic.cinematic.dtos.requestdtos.FilmReviewRequestDto;
+import com.cinematic.cinematic.dtos.CreateFilmReviewRequestDto;
 import com.cinematic.cinematic.models.Film;
 import com.cinematic.cinematic.models.FilmReview;
 import com.cinematic.cinematic.models.User;
@@ -52,7 +52,7 @@ class FilmReviewServiceImplTest {
         val userId= 12L;
         val film = Film.builder().title("titolo").filmId(filmId).build();
         val user = User.builder().userName("nome").userId(filmId).build();
-        val reviewRequest = FilmReviewRequestDto.builder().review("trappola di cristallo").filmId(filmId).userId(userId).build();
+        val reviewRequest = CreateFilmReviewRequestDto.builder().review("trappola di cristallo").filmId(filmId).userId(userId).build();
         when(filmRepository.findById(filmId)).thenReturn(Optional.of(film));
         when(userRepository.findById(userId)).thenReturn(Optional.of(user));
 

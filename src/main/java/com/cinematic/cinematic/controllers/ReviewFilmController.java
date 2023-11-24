@@ -1,7 +1,7 @@
 package com.cinematic.cinematic.controllers;
 
 import com.cinematic.cinematic.dtos.FilmReviewDto;
-import com.cinematic.cinematic.dtos.requestdtos.FilmReviewRequestDto;
+import com.cinematic.cinematic.dtos.CreateFilmReviewRequestDto;
 import com.cinematic.cinematic.mappers.FilmReviewMapper;
 import com.cinematic.cinematic.services.impl.FilmReviewServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +23,7 @@ public class ReviewFilmController {
     }
 
     @PostMapping
-    public void makeFilmReview(@RequestBody FilmReviewRequestDto requestDto){
+    public void makeFilmReview(@RequestBody CreateFilmReviewRequestDto requestDto){
         filmReviewService.makeFilmReview(requestDto);
     }
 }

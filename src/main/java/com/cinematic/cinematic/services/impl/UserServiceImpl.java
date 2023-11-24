@@ -1,6 +1,6 @@
 package com.cinematic.cinematic.services.impl;
 
-import com.cinematic.cinematic.dtos.requestdtos.UserRequestDto;
+import com.cinematic.cinematic.dtos.CreateUserRequestDto;
 import com.cinematic.cinematic.exceptions.NotFoundException;
 import com.cinematic.cinematic.models.Cinema;
 import com.cinematic.cinematic.models.User;
@@ -10,7 +10,6 @@ import com.cinematic.cinematic.services.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -40,17 +39,17 @@ public class UserServiceImpl implements UserService {
         return user.get();
     }
 
-    public void makeUser(UserRequestDto userRequestDto) {
-        log.info("Start - makeUser - args: userRequest: {}", userRequestDto);
+    public void makeUser(CreateUserRequestDto createUserRequestDto) {
+        log.info("Start - makeUser - args: userRequest: {}", createUserRequestDto);
         Optional<Cinema> cinema = Optional.empty();
-        if (userRequestDto.getCinemaId() != null) {
-            cinema = cinemaRepository.findById(userRequestDto.getCinemaId());
+        if (createUserRequestDto.getCinemaId() != null) {
+            cinema = cinemaRepository.findById(createUserRequestDto.getCinemaId());
         }
         val user = User.builder()
-                .userName(userRequestDto.getUserName())
-                .role(userRequestDto.getRole())
-                .email(userRequestDto.getEmail())
-                .password(userRequestDto.getPassword())
+                .userName(createUserRequestDto.getUserName())
+                .role(createUserRequestDto.getRole())
+                .email(createUserRequestDto.getEmail())
+                .password(createUserRequestDto.getPassword())
                 .cinema(cinema.orElse(null))
                 .build();
         userRepository.save(user);

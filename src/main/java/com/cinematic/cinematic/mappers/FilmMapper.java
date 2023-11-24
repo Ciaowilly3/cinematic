@@ -7,7 +7,7 @@ import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
-@Mapper(componentModel = "pring")
+@Mapper(componentModel = "spring")
 public interface FilmMapper {
 //    FilmMapper INSTANCE = Mappers.getMapper(FilmMapper.class);
     FilmDto filmToFilmDto(Film film);

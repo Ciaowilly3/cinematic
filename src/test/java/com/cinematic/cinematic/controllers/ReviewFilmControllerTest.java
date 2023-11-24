@@ -1,6 +1,6 @@
 package com.cinematic.cinematic.controllers;
 
-import com.cinematic.cinematic.dtos.requestdtos.FilmReviewRequestDto;
+import com.cinematic.cinematic.dtos.CreateFilmReviewRequestDto;
 import com.cinematic.cinematic.models.FilmReview;
 import com.cinematic.cinematic.services.impl.FilmReviewServiceImpl;
 import lombok.val;
@@ -43,7 +43,7 @@ class ReviewFilmControllerTest {
 
     @Test
     void makeFilmReview() throws Exception{
-        val review = FilmReviewRequestDto.builder().review("reviu").build();
+        val review = CreateFilmReviewRequestDto.builder().review("reviu").build();
 
         mockMvc.perform(post(path)
                 .contentType("application/json")

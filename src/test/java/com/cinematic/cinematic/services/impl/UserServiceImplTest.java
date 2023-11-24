@@ -1,7 +1,6 @@
 package com.cinematic.cinematic.services.impl;
 
-import com.cinematic.cinematic.dtos.requestdtos.UserRequestDto;
-import com.cinematic.cinematic.models.Film;
+import com.cinematic.cinematic.dtos.CreateUserRequestDto;
 import com.cinematic.cinematic.models.User;
 import com.cinematic.cinematic.repositories.UserRepository;
 import lombok.val;
@@ -54,7 +53,7 @@ class UserServiceImplTest {
 
     @Test
     void makeUser() {
-        val userRequestDto = UserRequestDto.builder().userName("Rocky").build();
+        val userRequestDto = CreateUserRequestDto.builder().userName("Rocky").build();
 
         userService.makeUser(userRequestDto);
 

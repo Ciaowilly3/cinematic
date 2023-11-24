@@ -1,6 +1,6 @@
 package com.cinematic.cinematic.services.impl;
 
-import com.cinematic.cinematic.dtos.requestdtos.FilmReviewRequestDto;
+import com.cinematic.cinematic.dtos.CreateFilmReviewRequestDto;
 import com.cinematic.cinematic.exceptions.NotFoundException;
 import com.cinematic.cinematic.models.FilmReview;
 import com.cinematic.cinematic.repositories.FilmRepository;
@@ -10,7 +10,6 @@ import com.cinematic.cinematic.services.FilmReviewService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,7 +30,7 @@ public class FilmReviewServiceImpl implements FilmReviewService {
         return filmReviews;
     }
 
-    public void makeFilmReview(FilmReviewRequestDto requestDto){
+    public void makeFilmReview(CreateFilmReviewRequestDto requestDto){
         log.info("Start - makeFilmReview - args: reviewRequest: {}", requestDto);
         val film = filmRepository.findById(requestDto.getFilmId());
         val user = userRepository.findById(requestDto.getUserId());

@@ -25,4 +25,4 @@ public class GenreController {
         return genreMapper.genreToGenreDto(genreService.retrieveGenreById(id));
     }
 }
-//TODO: rendere path uguale al nome del controller
+//TODO: rendere path uguale al nome del controller SEMI-FATTO problema plurale

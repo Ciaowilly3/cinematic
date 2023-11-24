@@ -1,7 +1,5 @@
-package com.cinematic.cinematic.dtos.requestdtos;
+package com.cinematic.cinematic.dtos;
 
-import com.cinematic.cinematic.models.User;
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,7 +7,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @Builder(toBuilder = true)
-public class UserRequestDto {
+public class CreateUserRequestDto {
 
     private String userName;
 
