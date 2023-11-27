@@ -1,9 +1,13 @@
 package com.cinematic.cinematic.services;
 
+import com.cinematic.cinematic.dtos.CreateProgrammationRequestDto;
 import com.cinematic.cinematic.models.Programmation;
 
 import java.util.List;
 
 public interface ProgrammationService {
-    public List<Programmation> retrieveAllProgrammations();
+    List<Programmation> retrieveAllProgrammations();
+
+    Programmation makeProgrammation(CreateProgrammationRequestDto programmationRequestDto);
+
 }

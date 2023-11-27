@@ -35,4 +35,8 @@ class ProgrammationServiceImplTest {
         assertEquals(programmation, result);
         verify(programmationRepository, times(1)).findAll();
     }
+
+    @Test
+    void makeProgrammation() {
+    }
 }
