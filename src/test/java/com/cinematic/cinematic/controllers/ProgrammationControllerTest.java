@@ -1,5 +1,6 @@
 package com.cinematic.cinematic.controllers;
 
+import com.cinematic.cinematic.dtos.CreateProgrammationRequestDto;
 import com.cinematic.cinematic.dtos.ProgrammationDto;
 import com.cinematic.cinematic.mappers.ProgrammationMapper;
 import com.cinematic.cinematic.models.Programmation;
@@ -53,5 +54,24 @@ class ProgrammationControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().json(expectedJson));
         verify(programmationService, times(1)).retrieveAllProgrammations();
+    }
+
+    @Test
+    void makeProgrammation() throws Exception {
+        val now = LocalDateTime.of(2023,4,23,12,00,00);
+        val programmationRequest = CreateProgrammationRequestDto.builder().programmation(now).build();
+        val programmation = Programmation.builder().programmation(now).build();
+        when(programmationService.makeProgrammation(programmationRequest)).thenReturn(programmation);
+        val programmationDto = ProgrammationDto.builder().programmation(now).build();
+        when(programmationMapper.toProgrammationDto(programmation)).thenReturn(programmationDto);
+
+        val resource = resourceLoader.getResource("classpath:programmation-single.json");
+        val expectedJson = new String(Objects.requireNonNull(resource.getInputStream()).readAllBytes(), StandardCharsets.UTF_8);
+
+        mockMvc.perform(post(path)
+                .contentType("application/json")
+                .content(expectedJson))
+                .andExpect(status().isCreated());
+        verify(programmationService, times(1)).makeProgrammation(programmationRequest);
     }
 }
