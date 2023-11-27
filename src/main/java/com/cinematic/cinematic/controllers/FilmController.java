@@ -33,6 +33,12 @@ public class FilmController {
 
     @GetMapping(path = "/{title}")
     public List<FilmDto> retrieveFilmsByTitle(@PathVariable String title){return filmMapper.toFilmsDtos(filmService.retrieveFilmsByTitle(title));}
+
+    @PutMapping(path = "/update-film/{id}")
+    public ResponseEntity<FilmDto> updateFilm(@PathVariable Long id, @RequestBody Film film){
+        return ResponseEntity.status(HttpStatus.ACCEPTED)
+                .body(filmMapper.toFilmDto(filmService.updateFilm(film, id)));
+    }
 }
 // TODO: levare api dal path FATTO
 // TODO: controllare la dependency injection venga fatta tramite requiredargsconstructor di lombok FATTO

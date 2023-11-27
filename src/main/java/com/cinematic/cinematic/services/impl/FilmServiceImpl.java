@@ -7,6 +7,7 @@ import com.cinematic.cinematic.services.FilmService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -39,10 +40,20 @@ public class FilmServiceImpl implements FilmService {
     }
 
     public Film makeNewFilm(Film film){
-        log.info("Start - makeNewFilm - args: title: {}", film);
+        log.info("Start - makeNewFilm - args: film: {}", film);
         filmRepository.save(film);
         log.info("End - makeNewFilm - out: none");
         return film;
+    }
+
+    public Film updateFilm(Film film, Long idToUpdate){
+        log.info("Start - updateFilm - args: Film: {}", film);
+        val filmToUpdate = filmRepository.findById(idToUpdate).orElseThrow(() -> new NotFoundException("Film with id " + idToUpdate + " Not Found"));
+        film.setFilmId(idToUpdate);
+        BeanUtils.copyProperties(film, filmToUpdate);
+        filmRepository.save(filmToUpdate);
+        log.info("End - updateFilm - out: {}", filmToUpdate);
+        return filmToUpdate;
     }
 
 }

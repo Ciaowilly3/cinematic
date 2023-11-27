@@ -13,4 +13,5 @@ public interface FilmService {
 
     Film makeNewFilm(Film film);
 
+    Film updateFilm(Film film, Long idToUpdate);
 }
