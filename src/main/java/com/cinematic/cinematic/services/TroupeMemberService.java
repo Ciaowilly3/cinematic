@@ -9,4 +9,6 @@ public interface TroupeMemberService {
     List<TroupeMember> retrieveAllTroupeMembers();
 
     TroupeMember retrieveTroupeMemberById(Long id);
+
+    TroupeMember makeTroupeMember(TroupeMember troupeMember);
 }

@@ -31,5 +31,12 @@ public class TroupeMemberServiceImpl implements TroupeMemberService {
         log.info("End - retrieveTroupeMemberById - out: {}", member.orElse(null));
         return member.orElseThrow(() -> new NotFoundException("not found member with id: " + id));
     }
+
+    public TroupeMember makeTroupeMember(TroupeMember troupeMember){
+        log.info("Start - makeTroupeMember - args: member: {}", troupeMember);
+        troupeMemberRepository.save(troupeMember);
+        log.info("End - makeTroupeMember - out: {}", troupeMember);
+        return troupeMember;
+    }
 }
 //TODO: capire come utilizzare orElse throw per levare l'if FATTO
