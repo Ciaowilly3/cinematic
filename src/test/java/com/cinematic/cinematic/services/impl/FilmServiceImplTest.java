@@ -67,4 +67,21 @@ class FilmServiceImplTest {
 
         verify(filmRepository, times(1)).save(film);
     }
+
+    @Test
+    void updateFilm() {
+        val filmId = 12L;
+
+        val filmToUpdate = Film.builder().title("trappola di cristallo").filmId(filmId).build();
+        val newFilm = Film.builder().title("Rocky").filmId(filmId).build();
+
+        when(filmRepository.findById(filmId)).thenReturn(Optional.of(filmToUpdate));
+
+        val result = filmService.updateFilm(newFilm, filmId);
+
+        assertEquals(newFilm, result);
+
+        verify(filmRepository,times(1)).save(newFilm);
+        verify(filmRepository, times(1)).findById(filmId);
+    }
 }

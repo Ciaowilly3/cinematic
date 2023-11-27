@@ -102,4 +102,21 @@ class FilmControllerTest {
 
         verify(filmService, times(1)).makeNewFilm(film);
     }
+
+    @Test
+    void updateFilm() throws Exception {
+        val filmId = 12L;
+
+        val newFilm = Film.builder().title("Rocky").build();
+
+        val resource = resourceLoader.getResource("classpath:film-single.json");
+        val expectedJson = new String(Objects.requireNonNull(resource.getInputStream()).readAllBytes(), StandardCharsets.UTF_8);
+
+        mockMvc.perform(put(path + "/update-film/{id}", filmId)
+                .contentType("application/json")
+                .content(expectedJson))
+                .andExpect(status().isAccepted());
+
+        verify(filmService, times(1)).updateFilm(newFilm, filmId);
+    }
 }
