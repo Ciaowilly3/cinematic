@@ -53,4 +53,10 @@ class GenreControllerTest {
                 .andExpect(content().json(expectedJson));
         verify(genreService, times(1)).retrieveGenreById(genreId);
     }
+
+    @Test
+    void makeGenre() {
+        val genre = Genre.builder().genreName("fantascienza").build();
+
+    }
 }

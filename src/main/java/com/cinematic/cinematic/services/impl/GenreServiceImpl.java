@@ -23,4 +23,11 @@ public class GenreServiceImpl implements GenreService {
         log.info("End - retrieveGenreById - out: {}", genre.orElse(null));
         return genre.orElseThrow(() -> new NotFoundException("genre with id " + id + " not found"));
     }
+
+    public Genre makeGenre(Genre genre){
+        log.info("Start - makeGenre - args: genre: {}", genre);
+        genreRepository.save(genre);
+        log.info("End - retrieveGenreById - out: {}", genre);
+        return genre;
+    }
 }
