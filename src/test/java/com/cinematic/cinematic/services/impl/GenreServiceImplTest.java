@@ -36,4 +36,14 @@ class GenreServiceImplTest {
 
         verify(genreRepository, times(1)).findById(genreId);
     }
+
+    @Test
+    void makeGenre() {
+        val genre = Genre.builder().genreName("fantascienza").build();
+
+        val result = genreService.makeGenre(genre);
+
+        verify(genreRepository, times(1)).save(genre);
+        assertEquals(genre, result);
+    }
 }

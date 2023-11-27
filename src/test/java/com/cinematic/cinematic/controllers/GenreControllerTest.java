@@ -14,6 +14,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
@@ -55,8 +56,16 @@ class GenreControllerTest {
     }
 
     @Test
-    void makeGenre() {
+    void makeGenre() throws Exception {
         val genre = Genre.builder().genreName("fantascienza").build();
 
+        val resource = resourceLoader.getResource("classpath:genre-single.json");
+        val expectedJson = new String(Objects.requireNonNull(resource.getInputStream()).readAllBytes(), StandardCharsets.UTF_8);
+
+        mockMvc.perform(post(path)
+                .contentType("application/json")
+                .content(expectedJson))
+                .andExpect(status().isCreated());
+        verify(genreService, times(1)).makeGenre(genre);
     }
 }
