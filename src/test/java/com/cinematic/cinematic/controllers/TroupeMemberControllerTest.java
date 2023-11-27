@@ -11,6 +11,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.http.HttpStatus;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.nio.charset.StandardCharsets;
@@ -64,12 +65,26 @@ class TroupeMemberControllerTest {
         val memberDto = TroupeMemberDto.builder().memberName("marco").build();
         when(troupeMemberMapper.toTroupeMemberDto(member)).thenReturn(memberDto);
 
-        val resource = resourceLoader.getResource("classpath:troupe-members-list.json");
+        val resource = resourceLoader.getResource("classpath:troupe-member-single.json");
         val expectedJson = new String(Objects.requireNonNull(resource.getInputStream()).readAllBytes(), StandardCharsets.UTF_8);
 
         mockMvc.perform(get(path + "/single-member/{id}", memberId))
                 .andExpect(status().isOk())
-                .andExpect(content().json("{\"memberName\" : \"marco\"}"));
+                .andExpect(content().json(expectedJson));
         verify(troupeMemberService, times(1)).retrieveTroupeMemberById(memberId);
+    }
+
+    @Test
+    void makeTroupeMember() throws Exception {
+        val member = TroupeMember.builder().memberName("marco").build();
+
+        val resource = resourceLoader.getResource("classpath:troupe-member-single.json");
+        val expectedJson = new String(Objects.requireNonNull(resource.getInputStream()).readAllBytes(), StandardCharsets.UTF_8);
+
+        mockMvc.perform(post(path)
+                .contentType("application/json")
+                .content(expectedJson))
+                .andExpect(status().isCreated());
+        verify(troupeMemberService, times(1)).makeTroupeMember(member);
     }
 }

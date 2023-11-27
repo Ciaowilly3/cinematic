@@ -50,4 +50,15 @@ class TroupeMemberServiceImplTest {
 
         verify(troupeMemberRepository, times(1)).findById(memberId);
     }
+
+    @Test
+    void makeTroupeMember() {
+        val member = TroupeMember.builder().memberName("marco").build();
+
+        val result = troupeMemberService.makeTroupeMember(member);
+
+        assertEquals(member, result);
+
+        verify(troupeMemberRepository, times(1)).save(member);
+    }
 }
