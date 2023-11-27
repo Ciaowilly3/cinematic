@@ -77,4 +77,4 @@ class CinemaControllerTest {
         verify(cinemaService, times(1)).addCinema(cinema);
     }
 }
-//TODO: è preferibile leggere i json da file in risorse
+//TODO: è preferibile leggere i json da file in risorse FATTO da fare
