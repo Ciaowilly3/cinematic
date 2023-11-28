@@ -119,4 +119,21 @@ class FilmControllerTest {
 
         verify(filmService, times(1)).updateFilm(newFilm, filmId);
     }
+
+    @Test
+    void removeFilm() throws Exception {
+        val filmId = 12L;
+        val film = Film.builder().title("Rocky").build();
+        when(filmService.removeFilm(filmId)).thenReturn(film);
+        val filmDto = FilmDto.builder().title("Rocky").build();
+        when(filmMapper.toFilmDto(film)).thenReturn(filmDto);
+
+        val resource = resourceLoader.getResource("classpath:film-single.json");
+        val expectedJson = new String(Objects.requireNonNull(resource.getInputStream()).readAllBytes(), StandardCharsets.UTF_8);
+
+        mockMvc.perform(delete(path + "/delete-film/{id}", filmId))
+                .andExpect(status().isAccepted())
+                .andExpect(content().json(expectedJson));
+        verify(filmService, times(1)).removeFilm(filmId);
+    }
 }

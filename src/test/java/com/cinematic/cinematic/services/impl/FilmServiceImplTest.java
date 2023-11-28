@@ -84,4 +84,19 @@ class FilmServiceImplTest {
         verify(filmRepository,times(1)).save(newFilm);
         verify(filmRepository, times(1)).findById(filmId);
     }
+
+    @Test
+    void removeFilm() {
+        val filmId = 12L;
+        val filmToDelete = Film.builder().title("trappola di cristallo").filmId(filmId).build();
+
+        when(filmRepository.findById(filmId)).thenReturn(Optional.of(filmToDelete));
+
+        val result = filmService.removeFilm(filmId);
+
+        assertEquals(filmToDelete, result);
+        verify(filmRepository, times(1)).findById(filmId);
+        verify(filmRepository, times(1)).delete(filmToDelete);
+
+    }
 }
