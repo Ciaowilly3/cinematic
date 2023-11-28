@@ -1,5 +1,6 @@
 package com.cinematic.cinematic.controllers;
 
+import com.cinematic.cinematic.dtos.CreateReviewTroupeDto;
 import com.cinematic.cinematic.dtos.ReviewTroupeDto;
 import com.cinematic.cinematic.mappers.ReviewTroupeMapper;
 import com.cinematic.cinematic.models.ReviewTroupe;
@@ -20,6 +21,7 @@ import java.util.Objects;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -55,5 +57,20 @@ class ReviewTroupeControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().json(expectedJson, true));
         verify(reviewTroupeService, times(1)).retrieveAllReviewsTroupe();
+    }
+
+    @Test
+    void makeReviewTroupe() throws Exception {
+        val review = ReviewTroupe.builder().review("cameron").build();
+        val request = CreateReviewTroupeDto.builder().review("cameron").build();
+
+        val resource = resourceLoader.getResource("classpath:review-troupe-single.json");
+        val expectedJson = new String(Objects.requireNonNull(resource.getInputStream()).readAllBytes(), StandardCharsets.UTF_8);
+
+        mockMvc.perform(post(path)
+                .contentType("application/json")
+                .content(expectedJson))
+                .andExpect(status().isCreated());
+        verify(reviewTroupeService, times(1)).makeReviewTroupe(request);
     }
 }

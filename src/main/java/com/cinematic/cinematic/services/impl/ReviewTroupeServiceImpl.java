@@ -36,6 +36,7 @@ public class ReviewTroupeServiceImpl implements ReviewTroupeService {
                 .review(reviewTroupeDto.getReview())
                 .troupeMember(member)
                 .user(user).build();
+        reviewTroupeRepository.save(review);
         log.info("End - makeReviewTroupe - out: {}", review);
         return review;
     }
