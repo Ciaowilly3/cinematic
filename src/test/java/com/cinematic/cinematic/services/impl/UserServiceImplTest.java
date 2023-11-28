@@ -61,4 +61,19 @@ class UserServiceImplTest {
 
         verify(userRepository, times(1)).save(user);
     }
+
+    @Test
+    void updateUser() {
+        val userRequestDto = CreateUserRequestDto.builder().userName("peppe").build();
+        val userId = 12L;
+        val user = User.builder().userName("marco").userId(userId).build();
+        when(userRepository.findById(userId)).thenReturn(Optional.of(user));
+
+        val result = userService.updateUser(userRequestDto, userId);
+
+        val newUser = User.builder().userName("peppe").userId(userId).build();
+        assertEquals(result, newUser);
+        verify(userRepository, times(1)).findById(userId);
+        verify(userRepository, times(1)).save(newUser);
+    }
 }

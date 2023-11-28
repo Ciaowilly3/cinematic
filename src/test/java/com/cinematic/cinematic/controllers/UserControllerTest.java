@@ -86,4 +86,20 @@ class UserControllerTest {
 
         verify(userService, times(1)).makeUser(user);
     }
+
+    @Test
+    void updateUser() throws Exception {
+        val user = CreateUserRequestDto.builder().userName("marco").build();
+        val userId = 12L;
+
+        val resource = resourceLoader.getResource("classpath:user-single.json");
+        val expectedJson = new String(Objects.requireNonNull(resource.getInputStream()).readAllBytes(), StandardCharsets.UTF_8);
+
+        mockMvc.perform(put(path + "/update-user/{id}", userId)
+                        .contentType("application/json")
+                        .content(expectedJson))
+                .andExpect(status().isAccepted());
+
+        verify(userService, times(1)).updateUser(user, userId);
+    }
 }
