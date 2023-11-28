@@ -53,4 +53,23 @@ public class UserServiceImpl implements UserService {
         log.info("End - makeUser - out: {}", user);
         return user;
     }
+
+    public User updateUser(CreateUserRequestDto userRequestDto, Long idToUpdate){
+        log.info("Start - updateUser - args: userRequest: {}", userRequestDto);
+        Optional<Cinema> cinema = Optional.empty();
+        if (userRequestDto.getCinemaId() != null) {
+            cinema = cinemaRepository.findById(userRequestDto.getCinemaId());
+        }
+        val user = userRepository.findById(idToUpdate).orElseThrow(() -> new NotFoundException("User with id "+ idToUpdate + " not found"))
+                .toBuilder()
+                .userName(userRequestDto.getUserName())
+                .cinema(cinema.orElse(null))
+                .role(userRequestDto.getRole())
+                .email(userRequestDto.getEmail())
+                .password(userRequestDto.getPassword())
+                .build();
+        userRepository.save(user);
+        log.info("End - updateUser - out: {}", user);
+        return user;
+    }
 }

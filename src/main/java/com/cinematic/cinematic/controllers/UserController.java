@@ -31,5 +31,11 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(userMapper.toUserDto(userService.makeUser(createUserRequestDto)));
     }
+
+    @PutMapping(path = "update-user/{id}")
+    public ResponseEntity<UserDto> updateUser(@PathVariable Long id, @RequestBody CreateUserRequestDto userRequestDto){
+        return ResponseEntity.status(HttpStatus.ACCEPTED)
+                .body(userMapper.toUserDto(userService.updateUser(userRequestDto, id)));
+    }
 }
 //TODO: utilizzare ResponseEntity<x> come tipo di uscita FATTO

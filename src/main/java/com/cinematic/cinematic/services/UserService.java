@@ -12,4 +12,6 @@ public interface UserService {
     User retrieveUserById(Long id);
 
     User makeUser(CreateUserRequestDto createUserRequestDto);
+
+    User updateUser(CreateUserRequestDto userRequestDto, Long idToUpdate);
 }
