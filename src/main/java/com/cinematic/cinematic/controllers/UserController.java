@@ -37,5 +37,11 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.ACCEPTED)
                 .body(userMapper.toUserDto(userService.updateUser(userRequestDto, id)));
     }
+
+    @DeleteMapping(path = "delete-user/{id}")
+    public ResponseEntity<UserDto> removeUser(@PathVariable Long id){
+        return ResponseEntity.status(HttpStatus.ACCEPTED)
+                .body(userMapper.toUserDto(userService.removeUser(id)));
+    }
 }
 //TODO: utilizzare ResponseEntity<x> come tipo di uscita FATTO

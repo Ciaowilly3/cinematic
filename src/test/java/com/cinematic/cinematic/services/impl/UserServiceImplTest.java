@@ -76,4 +76,20 @@ class UserServiceImplTest {
         verify(userRepository, times(1)).findById(userId);
         verify(userRepository, times(1)).save(newUser);
     }
+
+    @Test
+    void removeUser() {
+        val userId = 12L;
+        val user = User.builder().userName("marco").userId(userId).build();
+
+        when(userRepository.findById(userId)).thenReturn(Optional.of(user));
+
+        val result = userService.removeUser(userId);
+
+        assertEquals(user, result);
+
+        verify(userRepository, times(1)).findById(userId);
+        verify(userRepository, times(1)).delete(user);
+
+    }
 }

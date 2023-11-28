@@ -72,4 +72,12 @@ public class UserServiceImpl implements UserService {
         log.info("End - updateUser - out: {}", user);
         return user;
     }
+
+    public User removeUser(Long idToDelte){
+        log.info("Start - removeUser - args: userRequest: {}", idToDelte);
+        val user = userRepository.findById(idToDelte).orElseThrow(() -> new NotFoundException("User with id "+ idToDelte + " not found"));
+        userRepository.delete(user);
+        log.info("End - removeUser - out: {}", user);
+        return user;
+    }
 }

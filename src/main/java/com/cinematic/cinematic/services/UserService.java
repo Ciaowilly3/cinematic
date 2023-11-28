@@ -14,4 +14,6 @@ public interface UserService {
     User makeUser(CreateUserRequestDto createUserRequestDto);
 
     User updateUser(CreateUserRequestDto userRequestDto, Long idToUpdate);
+
+    User removeUser(Long idToDelete);
 }

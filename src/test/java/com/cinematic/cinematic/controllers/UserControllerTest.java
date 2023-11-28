@@ -102,4 +102,22 @@ class UserControllerTest {
 
         verify(userService, times(1)).updateUser(user, userId);
     }
+
+    @Test
+    void removeUser() throws Exception {
+        val userId = 12L;
+        val user = User.builder().userName("marco").userId(userId).build();
+        when(userService.removeUser(userId)).thenReturn(user);
+        val userDto = UserDto.builder().userName("marco").build();
+        when(userMapper.toUserDto(user)).thenReturn(userDto);
+
+
+        val resource = resourceLoader.getResource("classpath:user-single.json");
+        val expectedJson = new String(Objects.requireNonNull(resource.getInputStream()).readAllBytes(), StandardCharsets.UTF_8);
+
+        mockMvc.perform(delete(path + "/delete-user/{id}", userId))
+                .andExpect(status().isAccepted())
+                .andExpect(content().json(expectedJson));
+        verify(userService, times(1)).removeUser(userId);
+    }
 }
