@@ -19,7 +19,7 @@ public class Ticket {
     private Long ticketId;
 
     @Column(name = "price")
-    private Float price;
+    private Double price;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

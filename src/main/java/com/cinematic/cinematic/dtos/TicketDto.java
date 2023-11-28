@@ -8,7 +8,7 @@ import lombok.Data;
 @AllArgsConstructor
 @Builder(toBuilder = true)
 public class TicketDto {
-    private Float price;
+    private Double price;
 
     private UserDto userDto;
 
