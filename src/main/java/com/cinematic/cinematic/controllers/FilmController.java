@@ -39,6 +39,12 @@ public class FilmController {
         return ResponseEntity.status(HttpStatus.ACCEPTED)
                 .body(filmMapper.toFilmDto(filmService.updateFilm(film, id)));
     }
+
+    @DeleteMapping(path = "/delete-film/{id}")
+    public ResponseEntity<FilmDto> removeFilm(@PathVariable Long id){
+        return ResponseEntity.status(HttpStatus.ACCEPTED)
+                .body(filmMapper.toFilmDto(filmService.removeFilm(id)));
+    }
 }
 // TODO: levare api dal path FATTO
 // TODO: controllare la dependency injection venga fatta tramite requiredargsconstructor di lombok FATTO

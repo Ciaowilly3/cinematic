@@ -56,5 +56,13 @@ public class FilmServiceImpl implements FilmService {
         return filmToUpdate;
     }
 
+    public Film removeFilm(Long idToDelete){
+        log.info("Start - deleteFilm - args: id: {}", idToDelete);
+        val filmToDelete = filmRepository.findById(idToDelete).orElseThrow(() -> new NotFoundException("Film with id " + idToDelete + " Not Found"));
+        filmRepository.delete(filmToDelete);
+        log.info("End - deleteFilm - args: film: {}", filmToDelete);
+        return filmToDelete;
+    }
+
 }
 //TODO: Orazio mi picchia se non traduco tutto in inglese DONE xD
