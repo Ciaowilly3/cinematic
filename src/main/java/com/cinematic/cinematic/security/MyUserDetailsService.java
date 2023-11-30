@@ -21,7 +21,7 @@ public class MyUserDetailsService implements UserDetailsService {
         val user = userRepository.findByUserName(userName).orElseThrow(() -> new NotFoundException("user with name" + userName + "not found"));
 
         return new org.springframework.security.core.userdetails.User(
-                user.getUserName(),
+                user.getUsername(),
                 user.getPassword(),
                 new ArrayList<>()
         );
