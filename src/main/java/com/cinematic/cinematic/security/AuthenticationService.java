@@ -7,6 +7,7 @@ import com.cinematic.cinematic.models.Role;
 import com.cinematic.cinematic.models.User;
 import com.cinematic.cinematic.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class AuthenticationService {
 
     private final UserRepository userRepository;
@@ -45,6 +47,7 @@ public class AuthenticationService {
         );
     val user = userRepository.findByUserName(request.getUserName())
             .orElseThrow();
+    log.info("IN AUTHENTICATION THE USER FOUND IS : {}", user);
     val jwtToken = jwtService.generateToken(user);
     return AuthenticationResponse.builder()
             .token(jwtToken)
