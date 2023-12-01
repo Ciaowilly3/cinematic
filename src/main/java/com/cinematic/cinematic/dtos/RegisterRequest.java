@@ -1,5 +1,6 @@
 package com.cinematic.cinematic.dtos;
 
+import com.cinematic.cinematic.models.Cinema;
 import com.cinematic.cinematic.models.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,6 +15,7 @@ public class RegisterRequest {
     private String userName;
     private String email;
     private Role role;
+    private Long cinemaId;
     private String password;
 
 }

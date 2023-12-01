@@ -5,6 +5,7 @@ import com.cinematic.cinematic.dtos.AuthenticationResponse;
 import com.cinematic.cinematic.dtos.RegisterRequest;
 import com.cinematic.cinematic.models.Role;
 import com.cinematic.cinematic.models.User;
+import com.cinematic.cinematic.repositories.CinemaRepository;
 import com.cinematic.cinematic.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +23,7 @@ public class AuthenticationService {
     private final UserRepository userRepository;
     private final JwtService jwtService;
     private final PasswordEncoder passwordEncoder;
+    private final CinemaRepository cinemaRepository;
     private final AuthenticationManager authenticationManager;
 
     public AuthenticationResponse register(RegisterRequest request) {
@@ -30,6 +32,7 @@ public class AuthenticationService {
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(request.getRole())
+                .cinema(cinemaRepository.findById(request.getCinemaId()).orElse(null))
                 .build();
         userRepository.save(user);
         val jwtToken = jwtService.generateToken(user);

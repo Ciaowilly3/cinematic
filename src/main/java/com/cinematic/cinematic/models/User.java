@@ -1,10 +1,7 @@
 package com.cinematic.cinematic.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -38,6 +35,7 @@ public class User implements UserDetails {
     @Column(name = "password")
     private String password;
 
+    @Getter
     @ManyToOne
     @JoinColumn(name = "default_cinema_id")
     private Cinema cinema;
@@ -51,10 +49,6 @@ public class User implements UserDetails {
     public String getUsername() {
         return userName;
     }
-
-//    public Role getRole() {
-//        return role;
-//    }
 
     @Override
     public boolean isAccountNonExpired() {
