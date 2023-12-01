@@ -19,10 +19,6 @@ public class JwtService {
 
     private static final String SECRET_KEY = "1A3F7B9C8E2D64F0B5A87C93E6D182FE4A5B7C0E9D8F3A1C2B0D8E7F6C4A385B";
 
-//    private final static Key key;
-//    @PostConstruct
-//    public void init(){key = Jwts.KEY.PBES2_HS256_A128KW.;
-//    }
     public String extractUsername(String token){
         return extractClaim(token, Claims::getSubject);
     }
@@ -34,6 +30,7 @@ public class JwtService {
         return Jwts
                 .builder()
                 .claims(extraClaims)
+                .claim("role", userDetails.getAuthorities())
                 .subject(userDetails.getUsername())
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24))
