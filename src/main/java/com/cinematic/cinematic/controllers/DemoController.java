@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("auth/controller")
+@RequestMapping("/private/controller")
 public class DemoController {
 
     @GetMapping

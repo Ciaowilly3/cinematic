@@ -27,6 +27,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests((authz) -> authz
                 .requestMatchers("/auth/**")
                 .permitAll()
+                .requestMatchers("/films/**")
+                .permitAll()
                 .anyRequest()
                 .authenticated())
                 .sessionManagement(session -> session
