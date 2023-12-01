@@ -13,6 +13,16 @@ public class DemoController {
 
     @GetMapping
     public ResponseEntity<String> sayHello(){
-        return ResponseEntity.ok("hello I'm not token free");
+        return ResponseEntity.ok("hello I'm not token free for any user");
+    }
+
+    @GetMapping(path = "role-user")
+    public ResponseEntity<String> sayHelloUser(){
+        return ResponseEntity.ok("hello I'm not token free for only user with role user");
+    }
+
+    @GetMapping(path = "role-admin")
+    public ResponseEntity<String> sayHelloAdmin(){
+        return ResponseEntity.ok("hello I'm not token free for only user with role Admin");
     }
 }
