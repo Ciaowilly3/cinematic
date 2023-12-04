@@ -4,6 +4,7 @@ import com.cinematic.cinematic.dtos.AuthenticationRequest;
 import com.cinematic.cinematic.dtos.AuthenticationResponse;
 import com.cinematic.cinematic.dtos.RegisterRequest;
 import com.cinematic.cinematic.security.AuthenticationService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
+@Tag(name = "auth controller", description = "makes a bunch of staff for logins and authentication")
 public class AuthenticationController {
 
     private final AuthenticationService authenticationService;

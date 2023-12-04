@@ -11,6 +11,7 @@ import java.util.List;
 public interface UserMapper {
 
     @Mapping(source = "cinema", target = "cinemaDto")
+    @Mapping(source = "username", target = "userName")
     UserDto toUserDto(User user);
 
     List<UserDto> toUserDtos(List<User> users);

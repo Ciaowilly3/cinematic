@@ -1,5 +1,6 @@
 package com.cinematic.cinematic.dtos;
 
+import com.cinematic.cinematic.models.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,7 +12,7 @@ public class UserDto {
 
     private String userName;
 
-    private String role;
+    private Role role;
 
     private String email;
 
