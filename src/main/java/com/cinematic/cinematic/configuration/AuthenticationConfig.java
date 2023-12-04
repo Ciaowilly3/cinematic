@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.val;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -19,14 +18,14 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @RequiredArgsConstructor
-public class ApplicationConfig implements WebMvcConfigurer {
+public class AuthenticationConfig implements WebMvcConfigurer {
     private final UserRepository userRepository;
     @Bean
     public UserDetailsService userDetailsService(){
         return username -> userRepository.findByUserName(username)
                 .orElseThrow(() -> new NotFoundException("User with name" + username + " not found"));
     }
-
+    // todo: far diventare questo notfound unauthorized eccezzione dedicata
     @Bean
     public AuthenticationProvider authenticationProvider(){
         val authProvider = new DaoAuthenticationProvider();

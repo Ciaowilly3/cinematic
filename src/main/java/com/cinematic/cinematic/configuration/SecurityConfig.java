@@ -24,10 +24,16 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests((authz) -> authz
+                .authorizeHttpRequests((auth) -> auth
                         .requestMatchers("private/controller/**")
                         .authenticated())
-                .authorizeHttpRequests((authz) -> authz
+                .authorizeHttpRequests((auth) -> auth
+                        .requestMatchers("private/controller/role-user")
+                        .hasRole("USER")
+                        .requestMatchers("private/controller/role-admin")
+                        .hasRole("ADMIN")
+                )
+                .authorizeHttpRequests((auth) -> auth
                     .anyRequest()
                     .permitAll())
                 .sessionManagement(session -> session
