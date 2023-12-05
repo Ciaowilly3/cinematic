@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://www.cleverbuilder.com/BookService/"
+           xmlns:tns="http://www.cleverbuilder.com/BookService/"
+           elementFormDefault="qualified">
+
+    <!-- Definizione del tipo 'Book' -->
+    <xs:element name="Book" type="tns:BookType"/>
+    <xs:complexType name="BookType">
+        <xs:sequence>
+            <xs:element name="ID" type="xs:string" minOccurs="0"/>
+            <xs:element name="Title" type="xs:string"/>
+            <xs:element name="Author" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Definizione del tipo 'Books' -->
+    <xs:element name="Books" type="tns:BooksType"/>
+    <xs:complexType name="BooksType">
+        <xs:sequence>
+            <xs:element ref="tns:Book" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Definizione del tipo 'GetBook' -->
+    <xs:element name="GetBook" type="tns:GetBookType"/>
+    <xs:complexType name="GetBookType">
+        <xs:sequence>
+            <xs:element name="ID" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Definizione del tipo 'GetBookResponse' -->
+    <xs:element name="GetBookResponse" type="tns:GetBookResponseType"/>
+    <xs:complexType name="GetBookResponseType">
+        <xs:sequence>
+            <xs:element ref="tns:Book" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Altri tipi e definizioni possono essere aggiunti qui a seconda delle tue esigenze -->
+
+</xs:schema>
