@@ -3,6 +3,9 @@ package com.cinematic.cinematic.controllers;
 import com.cinematic.cinematic.dtos.TicketDto;
 import com.cinematic.cinematic.mappers.TicketMapper;
 import com.cinematic.cinematic.models.Ticket;
+import com.cinematic.cinematic.repositories.UserRepository;
+import com.cinematic.cinematic.security.JwtService;
+import com.cinematic.cinematic.security.MyUserDetailsService;
 import com.cinematic.cinematic.services.impl.TicketServiceImpl;
 import lombok.val;
 import org.junit.jupiter.api.Test;
@@ -11,6 +14,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.nio.charset.StandardCharsets;
@@ -25,6 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(TicketController.class)
 @AutoConfigureMockMvc
+@ContextConfiguration
 class TicketControllerTest {
     @Autowired
     private MockMvc mockMvc;
@@ -34,9 +40,16 @@ class TicketControllerTest {
     private TicketServiceImpl ticketService;
     @MockBean
     private TicketMapper ticketMapper;
+    @MockBean
+    private UserRepository userRepository;
+    @MockBean
+    private MyUserDetailsService myUserDetailsService;
+    @MockBean
+    private JwtService jwtService;
 
     private final String path = "/tickets";
     @Test
+    @WithMockUser
     void retrieveAllTickets() throws Exception {
         val ticket1 = Ticket.builder().price(2.5).build();
         val ticket2 = Ticket.builder().price(3.0).build();

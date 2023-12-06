@@ -6,6 +6,9 @@ import com.cinematic.cinematic.mappers.ReviewTroupeMapper;
 import com.cinematic.cinematic.mappers.SubscriptionMapper;
 import com.cinematic.cinematic.models.Subscription;
 import com.cinematic.cinematic.models.User;
+import com.cinematic.cinematic.repositories.UserRepository;
+import com.cinematic.cinematic.security.JwtService;
+import com.cinematic.cinematic.security.MyUserDetailsService;
 import com.cinematic.cinematic.services.impl.ReviewTroupeServiceImpl;
 import com.cinematic.cinematic.services.impl.SubscriptionServiceImpl;
 import lombok.val;
@@ -15,6 +18,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.nio.charset.StandardCharsets;
@@ -38,9 +42,16 @@ class SubscriptionControllerTest {
     private SubscriptionServiceImpl subscriptionService;
     @MockBean
     private SubscriptionMapper subscriptionMapper;
+    @MockBean
+    private UserRepository userRepository;
+    @MockBean
+    private MyUserDetailsService myUserDetailsService;
+    @MockBean
+    private JwtService jwtService;
 
     private final String path = "/subscriptions";
     @Test
+    @WithMockUser
     void retrieveSubByUserId() throws Exception {
         val id = 12L;
         val user = User.builder().userName("marco").build();

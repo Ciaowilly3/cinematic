@@ -15,7 +15,7 @@ import java.awt.print.Book;
 import java.util.List;
 
 @RestController
-@RequestMapping("prducts")
+@RequestMapping("products")
 @RequiredArgsConstructor
 public class ExternalCallController {
 

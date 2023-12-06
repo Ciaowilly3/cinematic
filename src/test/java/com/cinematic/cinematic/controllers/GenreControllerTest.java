@@ -3,6 +3,9 @@ package com.cinematic.cinematic.controllers;
 import com.cinematic.cinematic.dtos.GenreDto;
 import com.cinematic.cinematic.mappers.GenreMapper;
 import com.cinematic.cinematic.models.Genre;
+import com.cinematic.cinematic.repositories.UserRepository;
+import com.cinematic.cinematic.security.JwtService;
+import com.cinematic.cinematic.security.MyUserDetailsService;
 import com.cinematic.cinematic.services.impl.GenreServiceImpl;
 import lombok.SneakyThrows;
 import lombok.val;
@@ -12,6 +15,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.io.IOException;
@@ -19,11 +24,13 @@ import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
 import static org.mockito.Mockito.*;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(GenreController.class)
 @AutoConfigureMockMvc
+@ContextConfiguration
 class GenreControllerTest {
 
     @Autowired
@@ -35,10 +42,17 @@ class GenreControllerTest {
     private GenreServiceImpl genreService;
     @MockBean
     private GenreMapper genreMapper;
+    @MockBean
+    private UserRepository userRepository;
+    @MockBean
+    private MyUserDetailsService myUserDetailsService;
+    @MockBean
+    private JwtService jwtService;
 
     private final String path = "/genres";
     @SneakyThrows
     @Test
+    @WithMockUser
     void retrieveGenreById() {
         val genreId = 12L;
         val genre = Genre.builder().genreId(genreId).genreName("fantascienza").build();
@@ -56,6 +70,7 @@ class GenreControllerTest {
     }
 
     @Test
+    @WithMockUser
     void makeGenre() throws Exception {
         val genre = Genre.builder().genreName("fantascienza").build();
 
@@ -64,6 +79,7 @@ class GenreControllerTest {
 
         mockMvc.perform(post(path)
                 .contentType("application/json")
+                        .with(csrf())
                 .content(expectedJson))
                 .andExpect(status().isCreated());
         verify(genreService, times(1)).makeGenre(genre);
