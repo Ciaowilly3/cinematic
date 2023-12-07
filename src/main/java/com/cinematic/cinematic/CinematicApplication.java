@@ -13,9 +13,9 @@ public class CinematicApplication {
 
 }
 //todo: sistemare i tag swagger FATTO
-//todo: vedere userName null
-//todo: chiamata rest a dummyJson
-//todo: chiamare Soap
-//todo: chiamare Grpc
+//todo: vedere userName null FATTO
+//todo: chiamata rest a dummyJson FATTO
+//todo: chiamare Soap FATTO
+//todo: chiamare Grpc FATTO
 //todo: redis
 
