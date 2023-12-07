@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package grpcperson;
+
+option java_package = "com.cinematic.grpcperson";
+
+option java_multiple_files = true;
+
+message PersonRequest {
+  string name = 1;
+  string surname = 2;
+}
+message PersonResponse {
+  PersonRequest message = 1;
+}
+service PersonService {
+  rpc getPerson(PersonRequest) returns (PersonResponse) {};
+}

@@ -18,3 +18,7 @@ logging:
     org:
       springframework:
         security: DEBUG
+grpc:
+  client:
+    servername: grpcperson
+    address: localhost:9090
