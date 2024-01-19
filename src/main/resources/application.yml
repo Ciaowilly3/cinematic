@@ -14,11 +14,13 @@ spring:
     loginProcessingUrl : /login
 logging:
   level:
+    io.grpc: DEBUG
     root: debug
     org:
       springframework:
         security: DEBUG
 grpc:
   client:
-    servername: grpcperson
-    address: localhost:9090
+    person-client:
+      address: localhost:9090
+      plaintext: true

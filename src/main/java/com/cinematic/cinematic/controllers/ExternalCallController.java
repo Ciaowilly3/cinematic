@@ -1,34 +1,34 @@
 package com.cinematic.cinematic.controllers;
 
+import com.cinematic.cinematic.dtos.PersonResponseDto;
+import com.cinematic.cinematic.dtos.PersonRestRequest;
 import com.cinematic.cinematic.models.Product;
-import com.cinematic.cinematic.services.impl.SoapServiceImpl;
+import com.cinematic.cinematic.services.impl.ExternalServiceImpl;
 import com.cleverbuilder.bookservice.GetAllBooksResponse;
 import lombok.RequiredArgsConstructor;
-import lombok.val;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
-
-import java.awt.print.Book;
-import java.util.List;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("products")
 @RequiredArgsConstructor
 public class ExternalCallController {
 
-    private final SoapServiceImpl soapService;
+    private final ExternalServiceImpl externalService;
     @GetMapping(path = "/{id}")
     public Product retrieveProductById(@PathVariable int id){
-        val restTemplate = new RestTemplate();
-
-        return restTemplate.getForObject("https://dummyjson.com/products/" + id, Product.class);
+       return externalService.invokeRest(id);
     }
 
     @GetMapping(path = "/books")
     public GetAllBooksResponse retrieveAllBooks(){
-        return soapService.getAllBooks();
+        return externalService.invokeSoap();
+    }
+
+    @GetMapping(path = "/person")
+    public ResponseEntity<PersonResponseDto> retrievePerson(@RequestBody PersonRestRequest personRestRequest){
+        return ResponseEntity.ok().body(externalService.invokeGrpc(personRestRequest.getName(), personRestRequest.getSurName()));
     }
 }
+// todo: creare service dedicato che a sua volta invochi il rest template
+// todo: aggiungere endpoint per grpc e

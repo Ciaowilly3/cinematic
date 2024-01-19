@@ -6,13 +6,18 @@ option java_package = "com.cinematic.grpcperson";
 
 option java_multiple_files = true;
 
+service PersonService {
+  rpc getPerson(PersonRequest) returns (PersonResponse) {};
+}
+
 message PersonRequest {
   string name = 1;
   string surname = 2;
 }
-message PersonResponse {
-  PersonRequest message = 1;
+message PersonMessage {
+  string name = 1;
+  string surname = 2;
 }
-service PersonService {
-  rpc getPerson(PersonRequest) returns (PersonResponse) {};
+message PersonResponse {
+  PersonMessage message = 1;
 }

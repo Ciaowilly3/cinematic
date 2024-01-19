@@ -8,15 +8,17 @@ import io.grpc.ManagedChannelBuilder;
 import io.grpc.StatusRuntimeException;
 import lombok.extern.slf4j.Slf4j;
 import net.devh.boot.grpc.client.inject.GrpcClient;
+import org.springframework.stereotype.Component;
 
 @Slf4j
+@Component
 public class PersonClient {
-
-    @GrpcClient("grpcperson")
+    @GrpcClient("person-client")
     private PersonServiceGrpc.PersonServiceBlockingStub blockingStub;
 
-    public void getPerson(String name, String surname) throws StatusRuntimeException{
-        ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 9090)
+
+    public PersonResponse getPerson(String name, String surname) throws StatusRuntimeException{
+        ManagedChannel managedChannel = ManagedChannelBuilder.forAddress("localhost", 9090)
                 .usePlaintext()
                 .build();
 
@@ -25,11 +27,12 @@ public class PersonClient {
                 .setSurname(surname)
                 .build();
 
+        blockingStub =  PersonServiceGrpc.newBlockingStub(managedChannel);
+
         PersonResponse response = blockingStub.getPerson(request);
 
-        log.info("Received response for " + name + " " + surname + ": " + response.getMessage());
+        log.info("Received response for " + name + " " + surname + ": " + response);
 
-        // Chiudi il canale gRPC
-        channel.shutdown();
+        return response;
     }
 }

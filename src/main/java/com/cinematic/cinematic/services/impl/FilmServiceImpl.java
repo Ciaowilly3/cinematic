@@ -42,7 +42,7 @@ public class FilmServiceImpl implements FilmService {
     public Film makeNewFilm(Film film){
         log.info("Start - makeNewFilm - args: film: {}", film);
         filmRepository.save(film);
-        log.info("End - makeNewFilm - out: none");
+        log.info("End - makeNewFilm - out: {}", film);
         return film;
     }
 

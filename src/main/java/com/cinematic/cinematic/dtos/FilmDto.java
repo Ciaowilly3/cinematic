@@ -9,6 +9,8 @@ import lombok.Data;
 @Builder(toBuilder = true)
 public class FilmDto {
 
+    private Long filmId;
+
     private String coverImg;
 
     private String title;
