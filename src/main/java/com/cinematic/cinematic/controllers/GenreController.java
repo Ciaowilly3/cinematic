@@ -14,7 +14,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequestMapping("genres")
 @RequiredArgsConstructor
@@ -24,6 +27,18 @@ public class GenreController {
 
     private final GenreServiceImpl genreService;
     private final GenreMapper genreMapper;
+
+    @Operation(summary = "Get a list of genres")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Found the list",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Genre.class)) }),
+            @ApiResponse(responseCode = "404", description = "lsit not found",
+                    content = @Content) })
+    @GetMapping
+    public List<GenreDto> retrieveAllGenres(){
+        return genreMapper.toGenreDtos(genreService.retrieveAllGenres());
+    }
 
     @Operation(summary = "Get a genre by its id")
     @ApiResponses(value = {
@@ -46,7 +61,8 @@ public class GenreController {
                             schema = @Schema(implementation = Genre.class)) }),
             @ApiResponse(responseCode = "400", description = "Invalid genre supplied",
                     content = @Content)})
-    @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping(path = "/private/make-genre")
     public ResponseEntity<GenreDto> makeGenre(@RequestBody Genre genre){
         return ResponseEntity.status(HttpStatus.CREATED).body(genreMapper.toGenreDto(genreService.makeGenre(genre)));
     }

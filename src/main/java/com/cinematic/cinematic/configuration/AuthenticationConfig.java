@@ -23,7 +23,7 @@ public class AuthenticationConfig implements WebMvcConfigurer {
     @Bean
     public UserDetailsService userDetailsService(){
         return username -> userRepository.findByUserName(username)
-                .orElseThrow(() -> new NotFoundException("User with name" + username + " not found"));
+                .orElseThrow(() -> new NotFoundException("User with name " + username + " not found"));
     }
     // todo: far diventare questo notfound unauthorized eccezzione dedicata
     @Bean

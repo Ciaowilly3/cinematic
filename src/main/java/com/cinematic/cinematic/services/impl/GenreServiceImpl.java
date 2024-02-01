@@ -9,12 +9,23 @@ import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Slf4j
 @RequiredArgsConstructor
 public class GenreServiceImpl implements GenreService {
 
     private final GenreRepository genreRepository;
+
+
+    @Override
+    public List<Genre> retrieveAllGenres() {
+        log.info("Start - retrieveAllgernes - args: none");
+        val genreList = genreRepository.findAll();
+        log.info("End - retrieveAllGenres out: {}", genreList.size());
+        return genreList;
+    }
 
     @Override
     public Genre retrieveGenreById(Long id) {

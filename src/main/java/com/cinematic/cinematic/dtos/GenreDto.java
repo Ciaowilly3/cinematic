@@ -8,5 +8,6 @@ import lombok.Data;
 @AllArgsConstructor
 @Builder(toBuilder = true)
 public class GenreDto {
+    private Long genreId;
     private String genreName;
 }

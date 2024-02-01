@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.awt.print.Book;
@@ -85,7 +86,8 @@ public class FilmController {
                     content = @Content),
             @ApiResponse(responseCode = "404", description = "Film not found",
                     content = @Content) })
-    @PutMapping(path = "/update-film/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    @PutMapping(path = "/private/update-film/{id}")
     public ResponseEntity<FilmDto> updateFilm(@PathVariable Long id, @RequestBody Film film){
         return ResponseEntity.status(HttpStatus.ACCEPTED)
                 .body(filmMapper.toFilmDto(filmService.updateFilm(film, id)));
@@ -111,3 +113,4 @@ public class FilmController {
 // TODO: sostituire l'istanza statica di mapstruct con la versione Bean, occhio ad aggiornare l'annotation aggiungendo modelspring FATTO
 // TODO: quando la variabile java è uguale a quella tra le graffe non specificare in pathvariable FATTO
 // TODO: scrivere path in snakecase; FATTO
+// TODO: PRivateFilmController

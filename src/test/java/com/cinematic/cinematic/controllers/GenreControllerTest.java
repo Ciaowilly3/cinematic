@@ -21,6 +21,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.Objects;
 
 import static org.mockito.Mockito.*;
@@ -50,6 +51,28 @@ class GenreControllerTest {
     private JwtService jwtService;
 
     private final String path = "/genres";
+
+    @SneakyThrows
+    @Test
+    @WithMockUser
+    void retrieveAllGenres() {
+        val genre1 = Genre.builder().genreName("fantasy").build();
+        val genre2 = Genre.builder().genreName("action").build();
+        val genreList = List.of(genre1, genre2);
+        when(genreService.retrieveAllGenres()).thenReturn(genreList);
+        val genreDto1 = GenreDto.builder().genreName("fantasy").build();
+        val genreDto2 = GenreDto.builder().genreName("action").build();
+        val genreDtoList = List.of(genreDto1, genreDto2);
+        when(genreMapper.toGenreDtos(genreList)).thenReturn(genreDtoList);
+
+        val resource = resourceLoader.getResource("classpath:genre-list.json");
+        val expectedJson = new String(Objects.requireNonNull(resource.getInputStream()).readAllBytes(), StandardCharsets.UTF_8);
+
+        mockMvc.perform(get(path))
+                .andExpect(status().isOk())
+                .andExpect(content().json(expectedJson));
+        verify(genreService, times(1)).retrieveAllGenres();
+    }
     @SneakyThrows
     @Test
     @WithMockUser
@@ -84,4 +107,5 @@ class GenreControllerTest {
                 .andExpect(status().isCreated());
         verify(genreService, times(1)).makeGenre(genre);
     }
+
 }

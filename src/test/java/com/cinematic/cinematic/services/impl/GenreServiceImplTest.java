@@ -9,6 +9,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -23,6 +24,21 @@ class GenreServiceImplTest {
 
     @InjectMocks
     private GenreServiceImpl genreService;
+
+    @Test
+    void retrieveAllGenres() {
+        val genre1 = Genre.builder().genreName("fantasy").build();
+        val genre2 = Genre.builder().genreName("action").build();
+        val genreList = List.of(genre1, genre2);
+
+        when(genreRepository.findAll()).thenReturn(genreList);
+
+        val result = genreService.retrieveAllGenres();
+
+        assertEquals(genreList, result);
+        verify(genreRepository, times(1)).findAll();
+
+    }
     @Test
     void retrieveGenreById() {
         val genreId = 12L;
@@ -46,4 +62,6 @@ class GenreServiceImplTest {
         verify(genreRepository, times(1)).save(genre);
         assertEquals(genre, result);
     }
+
+
 }
