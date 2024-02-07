@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -36,5 +38,8 @@ public class Film {
 
     @Column(name = "fun_facts")
     private String funFacts;
+
+    @OneToMany(mappedBy = "film")
+    private Set<FilmsGenres> filmGenre;
 
 }

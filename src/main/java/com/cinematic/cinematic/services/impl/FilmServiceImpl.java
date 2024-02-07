@@ -2,7 +2,10 @@ package com.cinematic.cinematic.services.impl;
 
 import com.cinematic.cinematic.exceptions.NotFoundException;
 import com.cinematic.cinematic.models.Film;
+import com.cinematic.cinematic.models.FilmsGenres;
 import com.cinematic.cinematic.repositories.FilmRepository;
+import com.cinematic.cinematic.repositories.FilmsGenresRepository;
+import com.cinematic.cinematic.repositories.GenreRepository;
 import com.cinematic.cinematic.services.FilmService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +14,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -18,6 +22,8 @@ import java.util.List;
 public class FilmServiceImpl implements FilmService {
 
     private final FilmRepository filmRepository;
+
+    private final FilmsGenresServiceImpl filmsGenresService;
 
     public List<Film> retrieveAllFilms(){
         log.info("Start - retrieveAllFilms - args:none");
@@ -42,6 +48,12 @@ public class FilmServiceImpl implements FilmService {
     public Film makeNewFilm(Film film){
         log.info("Start - makeNewFilm - args: film: {}", film);
         filmRepository.save(film);
+        if (film.getFilmGenre() != null){
+            for (FilmsGenres filmsGenres : film.getFilmGenre()){
+                String string =  filmsGenres.getGenre().getGenreName();
+               filmsGenresService.addGenreToFilm(film.getTitle(), string);
+            }
+        }
         log.info("End - makeNewFilm - out: {}", film);
         return film;
     }
@@ -65,4 +77,3 @@ public class FilmServiceImpl implements FilmService {
     }
 
 }
-//TODO: Orazio mi picchia se non traduco tutto in inglese DONE xD
