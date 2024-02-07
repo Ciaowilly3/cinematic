@@ -41,10 +41,16 @@ public class SecurityConfig {
                         .hasRole("ADMIN")
                 )
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/films/private/update-film/{id}")
+                        .requestMatchers("/films/private/**")
                         .authenticated())
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/films/private/update-film/{id}")
+                        .requestMatchers("/films/private/**")
+                        .hasRole("ADMIN")
+                ).authorizeHttpRequests((auth) -> auth
+                        .requestMatchers("/genres/private/**")
+                        .authenticated())
+                .authorizeHttpRequests((auth) -> auth
+                        .requestMatchers("/genres/private/**")
                         .hasRole("ADMIN")
                 ).authorizeHttpRequests((auth) -> auth
                     .anyRequest()
@@ -57,16 +63,6 @@ public class SecurityConfig {
         return http.build();
     }
 
-//    @Bean
-//    public CorsFilter corsFilter() {
-//        CorsConfiguration configuration = new CorsConfiguration();
-//        configuration.addAllowedOrigin("http://localhost:5173/");
-//        configuration.addAllowedMethod("*");
-//        configuration.addAllowedHeader("*");
-//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//        source.registerCorsConfiguration("/**", configuration);
-//        return new CorsFilter(source);
-//    }
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("swagger-ui.html")
                 .addResourceLocations("classpath:/META-INF/resources/");

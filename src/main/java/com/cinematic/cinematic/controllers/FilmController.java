@@ -59,7 +59,7 @@ public class FilmController {
                             schema = @Schema(implementation = Film.class)) }),
             @ApiResponse(responseCode = "400", description = "Invalid film supplied",
                     content = @Content)})
-    @PostMapping
+    @PostMapping(path = "/private")
     public ResponseEntity<FilmDto> makeNewFilm(@RequestBody Film film){
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(filmMapper.toFilmDto(filmService.makeNewFilm(film)));

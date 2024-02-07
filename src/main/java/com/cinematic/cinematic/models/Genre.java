@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -21,4 +23,7 @@ public class Genre {
 
     @Column(name = "genre_name")
     private String genreName;
+//
+//    @OneToMany(mappedBy = "genre")
+//    private Set<FilmsGenres> filmGenre;
 }
