@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder(toBuilder = true)
-@Table(name = "film_genres")
+@Table(name = "films_genres")
 public class FilmsGenres {
 
     @Id

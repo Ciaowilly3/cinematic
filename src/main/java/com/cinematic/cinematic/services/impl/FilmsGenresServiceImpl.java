@@ -5,16 +5,19 @@ import com.cinematic.cinematic.models.FilmsGenres;
 import com.cinematic.cinematic.repositories.FilmRepository;
 import com.cinematic.cinematic.repositories.FilmsGenresRepository;
 import com.cinematic.cinematic.repositories.GenreRepository;
+import com.cinematic.cinematic.services.FilmsGenresService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class FilmsGenresServiceImpl {
+public class FilmsGenresServiceImpl implements FilmsGenresService {
 
     private final FilmsGenresRepository filmsGenresRepository;
     private final FilmRepository filmRepository;
@@ -36,5 +39,16 @@ public class FilmsGenresServiceImpl {
         filmsGenresRepository.save(filmsGenresToSave);
 
         log.info("End - addGenreToFilm");
+    }
+
+    @Transactional
+    public void deleteRelation(Long filmId){
+        log.info("Start - deleteRelationsByFilmId - args: filmId: {}", filmId);
+
+        List<FilmsGenres> relationsToDelete = filmsGenresRepository.findAllByFilmIdCustomQuery(filmId);
+
+        filmsGenresRepository.deleteAll(relationsToDelete);
+
+        log.info("End - deleteRelationsByFilmId");
     }
 }
