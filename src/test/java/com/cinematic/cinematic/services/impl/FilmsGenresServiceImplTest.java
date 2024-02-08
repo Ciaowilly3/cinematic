@@ -49,4 +49,12 @@ class FilmsGenresServiceImplTest {
         verify(genreRepository, times(1)).findByGenreName("azione");
         verify(filmsGenresRepository, times(1)).save(filmGenres);
     }
+
+    @Test
+    void deleteRelation() {
+        val filmId =12L;
+        filmsGenresService.deleteRelation(filmId);
+
+        verify(filmsGenresRepository, times(1)).findAllByFilmIdCustomQuery(filmId);
+    }
 }
