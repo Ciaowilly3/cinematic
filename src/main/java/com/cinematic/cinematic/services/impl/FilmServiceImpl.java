@@ -62,6 +62,13 @@ public class FilmServiceImpl implements FilmService {
         log.info("Start - updateFilm - args: Film: {}", film);
         val filmToUpdate = filmRepository.findById(idToUpdate).orElseThrow(() -> new NotFoundException("Film with id " + idToUpdate + " Not Found"));
         film.setFilmId(idToUpdate);
+        if (film.getFilmGenre() != null){
+            filmsGenresService.deleteRelation(idToUpdate);
+            for (FilmsGenres filmsGenres : film.getFilmGenre()){
+                String string =  filmsGenres.getGenre().getGenreName();
+                filmsGenresService.addGenreToFilm(film.getTitle(), string);
+            }
+        }
         BeanUtils.copyProperties(film, filmToUpdate);
         filmRepository.save(filmToUpdate);
         log.info("End - updateFilm - out: {}", filmToUpdate);
